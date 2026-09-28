@@ -1,56 +1,92 @@
-const LIVE = [
-  {
-    name: 'ALi',
-    what: 'Multi-tenant RAG platform, schema-isolated per client',
-    when: 'since Apr 2026',
-  },
-  {
-    name: 'CreditVeto',
-    what: 'Credit scoring and real-time fraud detection, Thelix',
-    when: 'since Jan 2026',
-  },
-  {
-    name: 'Ornate Healthcare',
-    what: 'CQC-aligned KPI platform for a UK care provider',
-    when: 'since May 2026',
-  },
-  {
-    name: 'MyFinbuk',
-    what: 'Offline-first bookkeeping suite for Nigerian SMBs',
-    when: 'since Apr 2026',
-  },
-]
+import { useEffect, useRef } from 'react'
+import { receipts } from '../../content'
+import { Underline } from '../Pencil'
 
 export default function Hero() {
+  const video = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const v = video.current
+    if (!v) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      v.removeAttribute('autoplay')
+      v.pause()
+    }
+  }, [])
+
   return (
-    <section id="top">
-      <div className="wrap">
-        <p className="status">
-          <i></i>Open to senior engineering roles
-        </p>
+    <header id="top">
+      <nav className="nav" aria-label="Main">
+        <a className="brand" href="#top">
+          <i aria-hidden="true">DJ</i>David John
+        </a>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#how">How I work</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <a className="nav-call" href="#contact">Book a call ↗</a>
+      </nav>
 
-        <h1 className="open">
-          Demos are easy. I build for the day the network drops, the numbers have to reconcile, and someone audits{' '}
-          <b>every row you ever wrote.</b>
-        </h1>
-
-        <div className="who">
-          <strong>David John, senior software engineer in Lagos.</strong>
-          I work in TypeScript and Python on backend and platform systems: agentic AI, African fintech, and software
-          that has to survive a regulator. Self-taught since 2020, shipping to production since 2021.
+      <div className="bento">
+        <div className="tile t-video">
+          <video
+            ref={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/hero-poster.jpg"
+            aria-label="Animation in four steps. The idea: a founder says I have an idea, is it even possible? The answer: yes, here is how. The plan: discovery, architecture, build. The product: secure, live, yours."
+          >
+            <source src="/hero-motion.webm" type="video/webm" />
+            <source src="/hero-motion.mp4" type="video/mp4" />
+          </video>
         </div>
 
-        <div className="live">
-          <p className="live-h">Running in production now</p>
-          {LIVE.map((item) => (
-            <div className="row" key={item.name}>
-              <span className="r-name">{item.name}</span>
-              <span className="r-what">{item.what}</span>
-              <span className="r-when">{item.when}</span>
+        <div className="t-sub">
+          <span className="kicker">Fractional CTO &amp; Software Architect</span>
+          <h1>
+            I help founders go from <em>“is this even possible?”</em> to a secure, live product.
+          </h1>
+          <p>
+            You bring the problem. I bring the judgment: what to build, what to skip, and how to keep it
+            standing once real people use it.
+          </p>
+        </div>
+
+        <figure className="tile t-photo">
+          <span className="tape" aria-hidden="true" />
+          <img src="/portrait.jpg" alt="David John, smiling, in an olive polo shirt" width={600} height={800} />
+          <figcaption className="hand">that's me, David</figcaption>
+        </figure>
+
+        <a className="tile t-cta" href="#contact">
+          <span className="label">Next step</span>
+          <b>Tell me the idea. I'll tell you if it's possible.</b>
+          <span className="go">
+            <span>Book a 30-min discovery call</span>
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </div>
+
+      <section className="receipts" aria-label="Proof">
+        <span className="label">Receipts, not claims</span>
+        <div className="receipts-row">
+          {receipts.map((r) => (
+            <div className="tile stat" key={r.big}>
+              <b className={r.small ? 'small' : undefined}>
+                {r.big}
+                {r.unit && <span>{r.unit}</span>}
+                {r.underline && <Underline />}
+              </b>
+              <p>{r.text}</p>
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </header>
   )
 }

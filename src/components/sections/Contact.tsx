@@ -1,85 +1,59 @@
-import { useReveal } from '../../hooks/useReveal'
-
-const WANT = [
-  {
-    term: 'Role',
-    detail: 'Senior backend or platform engineer. Teams building AI systems, fintech, or regulated software.',
-  },
-  {
-    term: 'Arrangement',
-    detail: 'Remote, full-time. Lagos, UTC+1, overlapping European and US East hours.',
-  },
-  { term: 'Notice', detail: 'Four weeks from offer.' },
-  {
-    term: 'Not looking for',
-    detail: 'Frontend-only roles, or work where nobody owns the architecture.',
-  },
-]
-
-const LINKS = [
-  { label: 'Résumé, PDF', href: '/david-john-resume.pdf', download: true },
-  { label: 'github.com/Mcsavvy', href: 'https://github.com/Mcsavvy' },
-  { label: 'medium.com/@mcsavvy', href: 'https://medium.com/@mcsavvy' },
-  { label: 'x.com/davemcsavvy', href: 'https://twitter.com/davemcsavvy' },
-  { label: '+234 808 879 2254', href: 'tel:+2348088792254' },
-]
+import { useState } from 'react'
+import { contact } from '../../content'
 
 export default function Contact() {
-  const h2 = useReveal<HTMLHeadingElement>()
-  const sub = useReveal<HTMLParagraphElement>()
-  const want = useReveal<HTMLDListElement>()
-  const mail = useReveal<HTMLAnchorElement>()
-  const links = useReveal<HTMLDivElement>()
+  const [copied, setCopied] = useState('Copy email')
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email)
+      setCopied('Copied')
+    } catch {
+      const el = document.getElementById('contact-email')
+      if (el) {
+        const range = document.createRange()
+        range.selectNodeContents(el)
+        const sel = window.getSelection()
+        sel?.removeAllRanges()
+        sel?.addRange(range)
+      }
+      setCopied('Selected, press copy')
+    }
+    setTimeout(() => setCopied('Copy email'), 2000)
+  }
 
   return (
-    <section id="contact">
-      <div className="wrap">
-        <p className="eyebrow">05 / Contact</p>
-        <h2 ref={h2.ref} className={h2.className} style={h2.style}>
-          What I am looking for
-        </h2>
-        <p ref={sub.ref} className={`sub ${sub.className}`} style={sub.style}>
-          If the shape below fits, the fastest thing you can do is email me.
-        </p>
-
-        <dl ref={want.ref} className={`want ${want.className}`} style={want.style}>
-          {WANT.map((item) => (
-            <div key={item.term}>
-              <dt>{item.term}</dt>
-              <dd>{item.detail}</dd>
-            </div>
-          ))}
-        </dl>
-
-        <a
-          ref={mail.ref}
-          className={`mail ${mail.className}`}
-          style={mail.style}
-          href="mailto:david@futurdevs.com"
-        >
-          david@futurdevs.com
-        </a>
-
-        <div ref={links.ref} className={`links ${links.className}`} style={links.style}>
-          {LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              download={link.download}
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              {link.label}
-            </a>
-          ))}
+    <>
+      <section className="contact" id="contact" aria-labelledby="contact-h">
+        <div>
+          <span className="label">Next step</span>
+          <h2 id="contact-h">
+            Tell me the idea. <em>I'll tell you if it's possible.</em>
+          </h2>
         </div>
-
-        <footer>
-          David John (Chukwuemeka) &nbsp;&middot;&nbsp; Lagos, Nigeria
-          <br />
-          ALX Certified Software Engineer, 2024 &nbsp;&middot;&nbsp; Hashgraph Developer, 2025
-        </footer>
-      </div>
-    </section>
+        <div className="side">
+          <p>A 30-minute discovery call. You talk, I ask questions, and you leave with an honest answer and a next step.</p>
+          <a className="btn-main" href={contact.bookingUrl}>
+            <span>Book a 30-min discovery call</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <div className="mail">
+            <span id="contact-email">{contact.email}</span>
+            <button type="button" onClick={copy}>{copied}</button>
+          </div>
+          <div className="links">
+            {contact.links.map((l) => (
+              <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      <footer className="footer">
+        <span>© {new Date().getFullYear()} David John</span>
+        <span>Lagos, Nigeria · building with founders worldwide</span>
+      </footer>
+    </>
   )
 }

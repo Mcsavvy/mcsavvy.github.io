@@ -1,24 +1,22 @@
-import Rail from './components/Rail'
+import { PencilFilter } from './components/Pencil'
 import Hero from './components/sections/Hero'
 import Work from './components/sections/Work'
-import Experience from './components/sections/Experience'
-import Stack from './components/sections/Stack'
-import Writing from './components/sections/Writing'
+import Process from './components/sections/Process'
+import About from './components/sections/About'
 import Contact from './components/sections/Contact'
 
 function App() {
   return (
-    <>
-      <Rail />
+    <div className="page">
+      <PencilFilter />
+      <Hero />
       <main>
-        <Hero />
         <Work />
-        <Experience />
-        <Stack />
-        <Writing />
+        <Process />
+        <About />
         <Contact />
       </main>
-    </>
+    </div>
   )
 }
 
