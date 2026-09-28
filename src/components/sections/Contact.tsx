@@ -32,9 +32,9 @@ export default function Contact() {
           </h2>
         </div>
         <div className="side">
-          <p>A 30-minute discovery call. You talk, I ask questions, and you leave with an honest answer and a next step.</p>
-          <a className="btn-main" href={contact.bookingUrl}>
-            <span>Book a 30-min discovery call</span>
+          <p>A 30-minute idea call. You talk, I ask questions, and you leave with an honest answer and a clear next step, whether or not we work together.</p>
+          <a className="btn-main" href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">
+            <span>{contact.bookingLabel}</span>
             <span aria-hidden="true">→</span>
           </a>
           <div className="mail">

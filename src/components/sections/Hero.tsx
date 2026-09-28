@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { receipts } from '../../content'
+import { contact, receipts } from '../../content'
 import { Underline } from '../Pencil'
 
 export default function Hero() {
@@ -25,7 +25,7 @@ export default function Hero() {
           <li><a href="#how">How I work</a></li>
           <li><a href="#about">About</a></li>
         </ul>
-        <a className="nav-call" href="#contact">Book a call ↗</a>
+        <a className="nav-call" href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">Book a call ↗</a>
       </nav>
 
       <div className="bento">
@@ -62,11 +62,11 @@ export default function Hero() {
           <figcaption className="hand">that's me, David</figcaption>
         </figure>
 
-        <a className="tile t-cta" href="#contact">
+        <a className="tile t-cta" href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">
           <span className="label">Next step</span>
           <b>Tell me the idea. I'll tell you if it's possible.</b>
           <span className="go">
-            <span>Book a 30-min discovery call</span>
+            <span>{contact.bookingLabel}</span>
             <span aria-hidden="true">→</span>
           </span>
         </a>

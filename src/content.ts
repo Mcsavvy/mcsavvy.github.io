@@ -2,8 +2,9 @@
 
 export const contact = {
   email: 'davidjohn@futurdevs.com',
-  // Replace with a Calendly / Cal.com link when ready. Until then the button opens an email.
-  bookingUrl: 'mailto:davidjohn@futurdevs.com?subject=Discovery%20call',
+  // "Is It Possible?" 30-minute idea call (Google Calendar booking page)
+  bookingUrl: 'https://calendar.app.google/kk2oCLz1PuEsUuwL9',
+  bookingLabel: 'Book an \u201cIs It Possible?\u201d call',
   links: [
     { label: 'LinkedIn', href: 'https://linkedin.com/in/davemcsavvy' },
     { label: 'GitHub', href: 'https://github.com/Mcsavvy' },

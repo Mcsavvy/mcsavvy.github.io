@@ -15,7 +15,7 @@ All copy lives in `src/content.ts`: projects, proof points, process steps, about
 Every figure is real and verifiable. Keep it that way.
 
 - **Project screenshots:** add an image to `public/` (16:10) and set `image: '/your-file.png'` on the project.
-- **Booking link:** replace `contact.bookingUrl` with your Calendly or Cal.com link.
+- **Booking link:** `contact.bookingUrl` points to the “Is It Possible?” Google Calendar booking page.
 - **Hero video:** `public/hero-motion.mp4` / `.webm`, with `public/hero-poster.jpg` as the still.
 
 ## Deploy
