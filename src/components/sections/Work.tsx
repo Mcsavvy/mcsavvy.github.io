@@ -45,6 +45,7 @@ export default function Work() {
             <div className="body">
               <span className="meta">{p.meta}</span>
               <h3>{p.title}</h3>
+              {p.role && <span className="role">{p.role}</span>}
               <p dangerouslySetInnerHTML={{ __html: p.story }} />
               <span className="hand moral">{p.moral}</span>
             </div>
@@ -62,6 +63,16 @@ export default function Work() {
           <div className="more">
             {more.map((m) => (
               <article className="card" key={m.title}>
+                {m.image ? (
+                  <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} loading="lazy" />
+                ) : (
+                  <div className="shot placeholder">
+                    <div>
+                      <b>Image</b>
+                      {m.shot} · 16:10
+                    </div>
+                  </div>
+                )}
                 <span className="meta">
                   <span>{m.meta}</span>
                   <b>{m.kind}</b>
