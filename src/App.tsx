@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import { PencilFilter } from './components/Pencil'
 import Hero from './components/sections/Hero'
 import Work from './components/sections/Work'
@@ -16,6 +17,7 @@ function App() {
         <About />
         <Contact />
       </main>
+      <Analytics />
     </div>
   )
 }
