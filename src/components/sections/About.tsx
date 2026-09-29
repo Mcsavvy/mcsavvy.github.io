@@ -9,7 +9,7 @@ export default function About() {
       </div>
       <div className="about">
         <p className="quote">
-          A yes costs nothing.{' '}
+          A “yes” costs nothing.{' '}
           <span>
             The bill arrives six months later.
             <Underline />

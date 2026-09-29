@@ -168,10 +168,10 @@ export const steps = [
 ]
 
 export const about = {
-  lead: 'Most founders I meet have already heard yes. Yes from an agency. Yes from a freelancer. Yes from an AI tool that built a demo overnight.',
+  lead: 'Most founders I meet have already heard “yes.” “Yes” from an agency. “Yes” from a freelancer. “Yes” from an AI tool that built a demo overnight.',
   body: [
     "What they haven't had is someone who asks why.",
-    'A yes costs nothing. The bill arrives six months later, when the demo meets real users, real money or a regulator.',
+    'A “yes” costs nothing. The bill arrives six months later, when the demo meets real users, real money or a regulator.',
     'So I start with questions. What does solving this earn you, or save you? What have you tried, and why did it fail? I write back what I heard, and you confirm it before any code exists. Then I freeze the first version, so it ships instead of growing forever.',
     "I've worked this way for teams in Nigeria, the UK and the US: a school platform that has run for two years, compliance software for a UK care provider, and a credit platform for Nigerian consumers.",
     "I taught myself to build software. I've spent years teaching others to do the same.",
