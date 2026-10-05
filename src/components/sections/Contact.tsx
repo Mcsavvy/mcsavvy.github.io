@@ -51,7 +51,7 @@ export default function Contact() {
         </div>
       </section>
       <footer className="footer">
-        <span>© {new Date().getFullYear()} David John</span>
+        <span>© {new Date().getFullYear()} David John Chukwuemeka</span>
         <span>Lagos, Nigeria · building with founders worldwide</span>
       </footer>
     </>

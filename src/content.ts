@@ -13,8 +13,8 @@ export const contact = {
 }
 
 export const receipts = [
-  { big: '5+', unit: '', text: 'years shipping production systems', underline: true },
-  { big: '2', unit: 'years', text: 'running one client platform in production, rebuilt without dropping service' },
+  { big: '150+', unit: '', text: 'students have used one platform I built, across two cohorts', underline: true },
+  { big: '2', unit: 'years', text: 'running a school platform, rebuilt without dropping service' },
   { big: 'UK · US · NG', unit: '', text: "founders and teams I've built for", small: true },
 ]
 
@@ -34,20 +34,10 @@ export const featured: Project[] = [
     title: 'PLSOM, a learning platform for a ministry school',
     role: 'Design · Architecture · DevOps · Engineering',
     story:
-      "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>150+ students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
+      "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>Hundreds of students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
     moral: 'The best rebuilds are the ones nobody notices.',
     shot: 'Student dashboard (illustrative design)',
     image: '/plsom-dashboard.jpg',
-  },
-  {
-    meta: 'Healthcare compliance · UK',
-    title: 'Trakitt, a compliance system for home care',
-    role: 'Design · Architecture · Engineering',
-    story:
-      "A care provider faces inspectors with one question: can you prove it? Spreadsheets can't. I designed a system where every incident and complaint leaves a record no one can edit later, and problems rise to the right manager before they become findings. It tracks <strong>41 KPIs</strong> across the regulator's five domains, so inspection day becomes a printout instead of a scramble. Built, delivered and ready for rollout.",
-    moral: 'In regulated work, the product is the proof.',
-    shot: 'Director fleet view with an escalated alert (illustrative design)',
-    image: '/trakitt-dashboard.jpg',
   },
   {
     meta: 'Fintech · Nigeria',
@@ -64,10 +54,20 @@ export const featured: Project[] = [
     title: 'ALi, an AI assistant for company knowledge',
     role: 'Full-stack · DevOps · Project management',
     story:
-      'The team had documents in every format and one frustration: the AI search found something, but rarely the right thing. It missed exact names and buried the file people needed. I stopped treating it as a model problem. My teammate and I paired keyword search with meaning-based search, then let the assistant ask for the next page of results the way a person would. <strong>Two organisations</strong> now pilot it.',
+      'The team had documents in every format and one frustration: the AI search found something, but rarely the right thing. It missed exact names and buried the file people needed. I stopped treating it as a model problem. I led the project. We paired keyword search with meaning-based search, then let the assistant ask for the next page of results the way a person would. <strong>Two organisations</strong> now pilot it.',
     moral: 'When AI disappoints, the fix is usually the system around it.',
     shot: 'Assistant answering a question',
     image: '/ali-assistant.jpg',
+  },
+  {
+    meta: 'Healthcare compliance · UK',
+    title: 'Trakitt, a compliance system for home care',
+    role: 'Design · Architecture · Engineering',
+    story:
+      "A care provider faces inspectors with one question: can you prove it? Spreadsheets can't. I designed a system where every incident and complaint leaves a record no one can edit later, and problems rise to the right manager before they become findings. It tracks <strong>41 KPIs</strong> across the regulator's five domains, so inspection day becomes a printout instead of a scramble. Built, delivered and ready for rollout.",
+    moral: 'In regulated work, the product is the proof.',
+    shot: 'Director fleet view with an escalated alert (illustrative design)',
+    image: '/trakitt-dashboard.jpg',
   },
 ]
 
@@ -117,7 +117,7 @@ export const more: MoreProject[] = [
     kind: 'Role',
     title: 'Techtic, bringing senior engineers onto AI',
     story:
-      'The CEO had a team of engineers with 10 to 20 years of experience and deep distrust of AI output. He asked me to change that. As AI enablement lead I ran hands-on sessions across backend and mobile, including turning Figma designs into production screens without losing fidelity, and showed where AI helps and where a human still decides.',
+      'The CEO had a team of engineers with 10 to 20 years of experience and deep distrust of AI output. He asked me to change that. As AI enablement lead I ran hands-on sessions across backend and mobile, including turning Figma designs into production screens without losing fidelity, and showed where AI helps and where a human still decides. Alongside that, I delivered full-stack work on two calculation-heavy products.',
     moral: 'Trust is taught, not forced.',
     shot: 'An AI-assisted build session, from Figma frame to reviewed code (illustrative design)',
     image: '/techtic-enablement.jpg',
@@ -137,7 +137,7 @@ export const more: MoreProject[] = [
     kind: 'Own product',
     title: 'Shotkeet, from a prompt to a video',
     story:
-      'Describe a product and get a finished MP4 back, built for Nigerian sellers who post from their phones. AI writes the video as code, a safety scan rejects unsafe output, and a queue worker renders it. This is my own project, and I built all of it myself in <strong>three days</strong>, from the rendering pipeline to the screen you type into.',
+      'Describe a product and get a finished MP4 back in about two minutes, built for Nigerian sellers who post from their phones. AI writes the video as code, a safety scan rejects unsafe output, and a queue worker renders it. This is my own project, and I built all of it myself in <strong>three days</strong>, from the rendering pipeline to the screen you type into.',
     moral: 'Small team. Full product.',
     shot: 'Form, live generation progress and the finished video (illustrative design)',
     image: '/shotkeet-video.jpg',
@@ -147,7 +147,7 @@ export const more: MoreProject[] = [
 export const steps = [
   {
     n: '01',
-    title: 'Discovery',
+    title: 'Research and discovery',
     text: "I ask what solving this earns or saves you, and what you've tried before. Then I write back what I heard. You confirm it before any code exists.",
   },
   {

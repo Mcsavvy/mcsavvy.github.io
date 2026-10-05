@@ -23,7 +23,7 @@ export default function Work() {
       <div className="sec-head">
         <span className="label">Selected work</span>
         <h2 id="work-h">
-          Problems founders <em>trusted me with.</em>
+          Products people <em>actually use.</em>
         </h2>
         <p>Four products, four different worries. Each one started with a question, not a spec.</p>
       </div>
@@ -33,7 +33,12 @@ export default function Work() {
           <article className="tile proj" key={p.title}>
             <span className="tape" aria-hidden="true" />
             {p.image ? (
-              <img className="shot" src={p.image} alt={`${p.title}: ${p.shot}`} />
+              <div className="shotwrap">
+                <img className="shot" src={p.image} alt={`${p.title}: ${p.shot}`} />
+                {p.shot.includes('(illustrative design)') && (
+                  <span className="shot-tag" aria-hidden="true">Illustrative</span>
+                )}
+              </div>
             ) : (
               <div className="shot placeholder">
                 <div>
@@ -64,8 +69,13 @@ export default function Work() {
             {more.map((m) => (
               <article className="card" key={m.title}>
                 {m.image ? (
-                  <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} loading="lazy" />
-                ) : (
+                  <div className="shotwrap">
+                    <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} loading="lazy" />
+                    {m.shot.includes('(illustrative design)') && (
+                      <span className="shot-tag" aria-hidden="true">Illustrative</span>
+                    )}
+                  </div>
+            ) : (
                   <div className="shot placeholder">
                     <div>
                       <b>Image</b>

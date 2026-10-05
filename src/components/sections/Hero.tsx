@@ -48,7 +48,7 @@ export default function Hero() {
         <div className="t-sub">
           <span className="kicker">Fractional CTO &amp; Software Architect</span>
           <h1>
-            I help founders go from <em>“is this even possible?”</em> to a secure, live product.
+            I turn your idea into a product people <em>actually use.</em>
           </h1>
           <p>
             You bring the problem. I bring the judgment: what to build, what to skip, and how to keep it
