@@ -51,8 +51,8 @@ export default function Hero() {
             I turn your idea into a product people <em>actually use.</em>
           </h1>
           <p>
-            You bring the problem. I bring the judgment: what to build, what to skip, and how to keep it
-            standing once real people use it.
+            You come with “is this even possible?” I bring the judgment: what to build, what to skip, and how
+            to keep it standing once real people use it.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function Hero() {
       </div>
 
       <section className="receipts" aria-label="Proof">
-        <span className="label">Receipts, not claims</span>
+        <span className="label">Track record</span>
         <div className="receipts-row">
           {receipts.map((r) => (
             <div className="tile stat" key={r.big}>

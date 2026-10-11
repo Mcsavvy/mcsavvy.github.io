@@ -7,15 +7,15 @@ export default function Process() {
       <div className="sec-head">
         <span className="label">How I work</span>
         <h2 id="how-h">
-          Questions first. <em>Code second.</em>
+          Every build starts with questions.
         </h2>
       </div>
       <ol className="how">
-        {steps.map((s, i) => (
+        {steps.map((s) => (
           <li className="step" key={s.n}>
             <span className="n">
               {s.n}
-              <Circle gold={i === steps.length - 1} />
+              <Circle />
             </span>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
