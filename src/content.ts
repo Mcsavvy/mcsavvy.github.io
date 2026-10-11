@@ -13,9 +13,24 @@ export const contact = {
 }
 
 export const receipts = [
-  { big: '150+', unit: '', text: 'students have used one platform I built, across two cohorts', underline: true },
-  { big: '2', unit: 'years', text: 'running a school platform, rebuilt without dropping service' },
+  { big: '150+', unit: '', text: 'students on a school platform I rebuilt, still running two years on', underline: true },
+  { big: '41', unit: '', text: 'inspection KPIs tracked for a UK home-care provider' },
   { big: 'UK · US · NG', unit: '', text: "founders and teams I've built for", small: true },
+]
+
+export const testimonial = { quote: '', name: '', role: '', org: '' }
+
+export const engagements = [
+  { title: 'Build it with you', text: 'One partner from research to launch: product, design, architecture, engineering and deployment.', price: 'Projects from $10,000' },
+  { title: 'Fractional CTO', text: 'Ongoing technical leadership for a founder or a small team: decisions, architecture, hiring and reviews.', price: '' },
+]
+
+export const faqs = [
+  { q: "I'm not technical. Is that a problem?", a: "No. Most founders I work with aren't. I explain each decision in plain language, and you test the product as it grows, so you always know where it stands." },
+  { q: 'Where are you based?', a: "Lagos, Nigeria (GMT+1). I've built for founders and teams in the UK, the US and Nigeria." },
+  { q: 'Can you work with my existing developers?', a: "Yes. I've led and trained engineering teams, including senior engineers adopting AI, and handed a live service over to new engineers mid-project." },
+  { q: 'What does it cost?', a: "Projects start from $10,000, depending on what we build. You'll get a clear figure after the idea call, which is free, whether or not we work together." },
+  { q: 'Who owns the code?', a: 'You do. All the code I write for your product is yours.' },
 ]
 
 export type Project = {
@@ -44,7 +59,7 @@ export const featured: Project[] = [
     title: 'CreditVeto, a credit and payments platform',
     role: 'Design · Architecture · Engineering',
     story:
-      'A new credit platform gets one chance. If money moves wrong once, users leave. I built the parts that decide whether money is safe to move: a fraud engine that watches every transaction, a credit score people can verify, and rewards that turn paying on time into a habit. New fraud rules ran in watch-only mode first, so an honest customer never got blocked by a guess. <strong>Over a thousand transactions</strong>, worth hundreds of millions of naira, have gone through it ahead of the wider launch.',
+      'A new credit platform gets one chance. If money moves wrong once, users leave. I built the parts that decide whether money is safe to move: a fraud engine that watches every transaction, a credit score people can verify, and rewards that turn paying on time into a habit. New fraud rules ran in watch-only mode first, so an honest customer never got blocked by a guess. <strong>Over a thousand transactions</strong> have gone through it ahead of the wider launch.',
     moral: 'Trust is a feature. I build it in from day one.',
     shot: 'Credit score, rewards and fraud rules (illustrative design)',
     image: '/creditveto-product.jpg',

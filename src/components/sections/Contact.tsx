@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { contact } from '../../content'
+import { contact, testimonial } from '../../content'
 
 export default function Contact() {
   const [copied, setCopied] = useState('Copy email')
@@ -22,6 +22,8 @@ export default function Contact() {
     setTimeout(() => setCopied('Copy email'), 2000)
   }
 
+  const showQuote = [testimonial.quote, testimonial.name, testimonial.role, testimonial.org].every((v) => v.trim() !== '')
+
   return (
     <>
       <section className="contact" id="contact" aria-labelledby="contact-h">
@@ -33,6 +35,14 @@ export default function Contact() {
         </div>
         <div className="side">
           <p>A 30-minute idea call. You talk, I ask questions, and you leave with an honest answer and a clear next step, whether or not we work together.</p>
+          {showQuote && (
+            <blockquote className="testimonial">
+              <p>{testimonial.quote}</p>
+              <footer>
+                {testimonial.name}, {testimonial.role}, {testimonial.org}
+              </footer>
+            </blockquote>
+          )}
           <a className="btn-main" href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">
             <span>{contact.bookingLabel}</span>
             <span aria-hidden="true">→</span>
