@@ -2,9 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const createApplication = vi.fn()
-const sendNotification = vi.fn()
 vi.mock('../_lib/pocketbase.js', () => ({ createApplication }))
-vi.mock('../_lib/email.js', () => ({ sendNotification }))
 
 const { default: handler } = await import('./apply')
 
@@ -50,34 +48,19 @@ function call(over: { method?: string; body?: unknown; headers?: Record<string, 
 
 beforeEach(() => {
   createApplication.mockReset().mockResolvedValue(undefined)
-  sendNotification.mockReset().mockResolvedValue(undefined)
   vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
 describe('POST /api/free-websites/apply', () => {
-  it('saves to PocketBase and emails on a valid application', async () => {
+  it('saves a valid application to PocketBase', async () => {
     const r = await call()
     expect(r.status).toBe(200)
     expect(createApplication).toHaveBeenCalledOnce()
-    expect(sendNotification).toHaveBeenCalledOnce()
-    expect(sendNotification.mock.calls[0][2]).toBeNull()
+    expect(createApplication.mock.calls[0][0]).toMatchObject({ business: 'Acme', agree: 'yes' })
   })
 
-  it('still emails when the PocketBase save fails, and says so in the email', async () => {
-    createApplication.mockRejectedValue(new Error('401 bad login'))
-    const r = await call()
-    expect(r.status).toBe(200)
-    expect(sendNotification.mock.calls[0][2]).toBe('401 bad login')
-  })
-
-  it('still succeeds when only the email fails', async () => {
-    sendNotification.mockRejectedValue(new Error('resend down'))
-    expect((await call()).status).toBe(200)
-  })
-
-  it('returns 502 and logs the payload when both fail', async () => {
-    createApplication.mockRejectedValue(new Error('a'))
-    sendNotification.mockRejectedValue(new Error('b'))
+  it('returns 502 and logs the payload when the save fails', async () => {
+    createApplication.mockRejectedValue(new Error('PocketBase 403'))
     const r = await call()
     expect(r.status).toBe(502)
     expect(console.error).toHaveBeenCalledWith(expect.stringContaining('NOT saved'), expect.stringContaining('Acme'))
@@ -87,7 +70,6 @@ describe('POST /api/free-websites/apply', () => {
     const r = await call({ body: { ...body, hp_url: 'http://spam.example' } })
     expect(r.status).toBe(200)
     expect(createApplication).not.toHaveBeenCalled()
-    expect(sendNotification).not.toHaveBeenCalled()
   })
 
   it('rejects invalid input with 400 and field errors', async () => {

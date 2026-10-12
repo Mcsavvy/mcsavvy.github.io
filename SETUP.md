@@ -1,17 +1,16 @@
 # Setup: 5 Free Websites application API
 
 The page lives at `public/free-websites/` and is served as-is at `/free-websites/`.
-The form posts JSON to `POST /api/free-websites/apply` (`api/free-websites/apply.ts`).
-Each application is saved to PocketBase and emailed to you through Resend.
-If the PocketBase save fails, the email still goes out (and says the save failed). If both fail,
-the visitor sees the WhatsApp fallback and the full application is logged in the Vercel function logs.
+The form posts JSON to `POST /api/free-websites/apply` (`api/free-websites/apply.ts`), which validates it
+(required fields, WhatsApp at least 10 digits, `agree === "yes"`, honeypot, per-IP rate limit) and creates a
+record in PocketBase. PocketBase emails you. If the save fails, the visitor sees the WhatsApp fallback and
+the full application is logged in the Vercel function logs.
 
-You need about 15 minutes. Do these in order.
+Vercel holds no PocketBase login. It only holds one random secret that can create records in one collection.
 
-## 1. PocketBase
+## 1. PocketBase collection `free_websites_applications`
 
-Applications are stored in the `free_websites_applications` collection on <https://backpocket.futurdevs.com>
-(already created, with every API rule empty so only a superuser can read or write).
+On <https://backpocket.futurdevs.com> (Base collection). Fields:
 
 | Field | Type | Notes |
 | --- | --- | --- |
@@ -31,55 +30,60 @@ Applications are stored in the `free_websites_applications` collection on <https
 | `decision` | Select | `chosen`, `backup`, `waitlist`. You fill this in. |
 | `created` | Autodate | set on create |
 
-Recreating it elsewhere: add these fields in the dashboard (**Collections > New collection > Base**), then
-open the collection's **API Rules** and leave all five rules empty (superuser only).
+**API rules.** Leave list, view, update and delete empty (superuser only). Set **Create rule** to:
 
-The function signs in as a superuser (`/api/collections/_superusers/auth-with-password`) and creates the record.
-Use a **dedicated superuser** for this (Dashboard > `_superusers` > New record) rather than your own login,
-so you can revoke it without locking yourself out. Its email and password become
-`POCKETBASE_EMAIL` and `POCKETBASE_PASSWORD`. `POCKETBASE_URL` is the base URL with no `/_/`.
+```
+@request.headers.x_free_websites_key = "PASTE_YOUR_SECRET_HERE" && @request.body.decision:isset = false
+```
 
-## 2. Resend
+Generate the secret with `openssl rand -hex 24`. The second condition stops a caller from setting `decision`.
+Check it: a request without the header must return 400 or 403, and one with the header must return 200:
 
-1. Sign up at <https://resend.com> and open **Domains > Add domain**: `futurdevs.com`.
-2. Resend shows DNS records (SPF `TXT`, DKIM `TXT`, and an MX for the `send` subdomain). Add them at
-   whoever hosts the DNS for futurdevs.com. Click **Verify** (can take a few minutes up to a few hours).
-3. **API Keys > Create API key**, permission "Sending access", domain `futurdevs.com`. Copy it. That is `RESEND_API_KEY`.
-4. `NOTIFY_EMAIL` is where applications are sent: `davidjohn@futurdevs.com`.
+```sh
+curl -i -X POST https://backpocket.futurdevs.com/api/collections/free_websites_applications/records \
+  -H 'Content-Type: application/json' -H 'X-Free-Websites-Key: <secret>' \
+  -d '{"business":"Test","type":"t","what":"w","city":"c","goal":"g","content":"c","name":"n","whatsapp":"08031234567","agree":true}'
+```
 
-Emails are sent from `Five Free Websites <apply@futurdevs.com>`. Any address on the verified domain
-works. To change it, set the optional `FROM_EMAIL` variable.
+Delete the test record afterwards.
+
+## 2. PocketBase email
+
+1. **Settings > Mail settings**: set the sender name and address and your SMTP server, then **Send test email**.
+   Also set **Application URL** under Settings > Application (the email links to it).
+2. Copy `pocketbase/free_websites_notify.pb.js` from this repo into `pb_hooks/` next to your PocketBase binary.
+   PocketBase reloads hooks on change (restart it if your setup does not).
+3. Create a test record from the dashboard and check that the email arrives. If it does not, look in the
+   PocketBase logs (Dashboard > Logs) for `free_websites_notify failed`.
+
+The recipient is set at the top of the hook file (`NOTIFY`).
 
 ## 3. Vercel environment variables
 
-In the Vercel dashboard: your project > **Settings > Environment Variables**. Add each of these for
-**Production and Preview** (Preview is needed so the preview deployment can be tested):
+In the Vercel dashboard: project > **Settings > Environment Variables**. Add for **Production and Preview**:
 
 | Name | Value |
 | --- | --- |
 | `POCKETBASE_URL` | `https://backpocket.futurdevs.com` |
-| `POCKETBASE_EMAIL` | email of the dedicated superuser |
-| `POCKETBASE_PASSWORD` | its password |
-| `RESEND_API_KEY` | Resend API key |
-| `NOTIFY_EMAIL` | `davidjohn@futurdevs.com` |
+| `POCKETBASE_CREATE_KEY` | the same secret as in the create rule (mark **Sensitive**) |
 
-Mark the password and API key **Sensitive**. Env var changes apply to **new** deployments only, so redeploy after adding them.
+Env var changes apply to new deployments only, so redeploy afterwards.
+CLI alternative: `vercel env add POCKETBASE_CREATE_KEY preview`.
 
-CLI alternative: `vercel env add POCKETBASE_PASSWORD preview` (repeat per variable and environment).
+## 4. Hard rate limit (recommended)
 
-## 4. Hard rate limit (recommended, 2 minutes)
-
-The function has an in-memory limit of 5 applications per IP per 10 minutes. That limit is per warm
-instance, so it stops double-submits and casual spam but not a determined bot. On the Pro plan, add a
-Firewall rule: **Project > Firewall > Add rule**, if **Request path** equals `/api/free-websites/apply`
-and **Method** equals `POST`, then **Rate limit**: 5 requests per 10 minutes per IP, action Deny (or Challenge).
+The function has an in-memory limit of 5 applications per IP per 10 minutes, per warm instance, so it stops
+double-submits and casual spam but not a determined bot. Anyone who learns the secret could also post
+straight to PocketBase, so keep it out of the repo and rotate it (change it in the rule and in Vercel) if it leaks.
+On the Pro plan, add a Firewall rule: **Project > Firewall > Add rule**, if **Request path** equals
+`/api/free-websites/apply` and **Method** equals `POST`, then **Rate limit** 5 requests per 10 minutes per IP.
 
 ## 5. Test it
 
 After redeploying with the variables set:
 
 1. Open the preview URL `/free-websites/`, fill the form, submit.
-2. Check: a new record in PocketBase (`free_websites_applications`), and an email with the business name in the subject.
+2. Check: a new record in `free_websites_applications` and the email.
 3. Or from a terminal (replace the host):
 
 ```sh
@@ -89,32 +93,30 @@ curl -sS -X POST https://<preview-host>/api/free-websites/apply \
 # {"ok":true}
 ```
 
-Preview deployments sit behind Vercel Deployment Protection by default. Use the browser while logged
-in to Vercel, or a protection-bypass token for curl. Delete test records from PocketBase afterwards.
+Preview deployments sit behind Vercel Deployment Protection by default. Use the browser while logged in to
+Vercel, or a protection-bypass token for curl. Delete test records afterwards.
 
 ## Troubleshooting
 
-Look at **Vercel > Deployments > (deployment) > Functions / Logs**, filter for `[free-websites]`.
+Vercel > Deployments > (deployment) > Logs, filter for `[free-websites]`.
 
 | Log line | Cause |
 | --- | --- |
-| `PocketBase save failed: PocketBase login 400` | Wrong `POCKETBASE_EMAIL` / `POCKETBASE_PASSWORD`, or the user is not in `_superusers` |
-| `PocketBase save failed: PocketBase 400: ...` | A field in the collection does not match (required field renamed, max length lowered) |
-| `PocketBase save failed: PocketBase 404` | The `free_websites_applications` collection does not exist |
-| `POCKETBASE_URL is not set` / `... are not set` | Variables missing for this environment, or no redeploy since adding them |
-| `PocketBase save failed: ... The operation was aborted` | PocketBase unreachable (8 second timeout) |
-| `email failed: Resend 403 ... domain is not verified` | futurdevs.com not verified in Resend yet |
-| `email failed: Resend 401` | Wrong or revoked `RESEND_API_KEY` |
-| `application NOT saved anywhere` | Both failed. The full application is in that log line, copy it out by hand |
+| `PocketBase 400` or `403` | Secret in Vercel differs from the create rule, or the rule is empty or has a typo |
+| `PocketBase 400: ...` with field names | A collection field does not match (required field renamed, max length lowered) |
+| `PocketBase 404` | The collection does not exist or was renamed |
+| `POCKETBASE_URL is not set` / `POCKETBASE_CREATE_KEY is not set` | Variable missing for this environment, or no redeploy since adding it |
+| `The operation was aborted` | PocketBase unreachable (8 second timeout) |
+| `application NOT saved` | The save failed. The full application is in that log line, copy it out by hand |
 
 ## Local development
 
 - `npm run dev` serves the page at <http://localhost:5173/free-websites/>. The API does not run under plain Vite.
 - `vercel dev` runs the page and the function together. Put values in `.env.local` (see `.env.example`).
-- `npm test` runs the API tests (validation, rate limit, formatting, handler behaviour with mocks).
+- `npm test` runs the API tests.
 
 ## Changing the form
 
-Field names are the contract between `public/free-websites/index.html` and `api/_lib/validate.ts`.
-If you add or rename a field, update `validate.ts`, `pocketbase.ts` (`toRecord`), the email in `format.ts`, the PocketBase collection, and the tests.
-The honeypot input is named `hp_url`. Keep it hidden and empty.
+Field names are the contract between `public/free-websites/index.html`, `api/_lib/validate.ts`,
+`api/_lib/pocketbase.ts` (`toRecord`), the PocketBase collection, and the email hook. Change them together,
+and update the tests. The honeypot input is named `hp_url`. Keep it hidden and empty.
