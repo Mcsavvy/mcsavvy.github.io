@@ -1,74 +1,89 @@
 # Setup: 5 Free Websites application API
 
 The page lives at `public/free-websites/` and is served as-is at `/free-websites/`.
-The form posts JSON to `POST /api/free-websites/apply` (`api/free-websites/apply.ts`).
-Each application is appended to a Google Sheet and emailed to you through Resend.
-If the sheet write fails, the email still goes out (and says the sheet failed). If both fail,
-the visitor sees the WhatsApp fallback and the full application is logged in the Vercel function logs.
+The form posts JSON to `POST /api/free-websites/apply` (`api/free-websites/apply.ts`), which validates it
+(required fields, WhatsApp at least 10 digits, `agree === "yes"`, honeypot, per-IP rate limit) and creates a
+record in PocketBase. PocketBase emails you. If the save fails, the visitor sees the WhatsApp fallback and
+the full application is logged in the Vercel function logs.
 
-You need about 15 minutes. Do these in order.
+Vercel holds no PocketBase login. It only holds one random secret that can create records in one collection.
 
-## 1. Google Sheet and service account
+## 1. PocketBase collection `free_websites_applications`
 
-1. Go to <https://console.cloud.google.com>, create a project (e.g. `free-websites`).
-2. **APIs & Services > Library**, search "Google Sheets API", click **Enable**.
-3. **APIs & Services > Credentials > Create credentials > Service account**. Name it
-   `free-websites`. Skip the optional role and user-access steps. Click Done.
-4. Open the new service account, **Keys > Add key > Create new key > JSON**. A file downloads.
-   Treat it like a password. Do not commit it.
-5. From that JSON file you need two values:
-   - `client_email` goes in `GOOGLE_SERVICE_ACCOUNT_EMAIL`
-   - `private_key` goes in `GOOGLE_PRIVATE_KEY` (the whole string, `\n` escapes included)
-6. Create a new Google Sheet, for example "5 Free Websites: applications".
-7. Click **Share**, paste the `client_email` address, give it **Editor**, untick "Notify people", Share.
-8. Copy the sheet id from the URL: `https://docs.google.com/spreadsheets/d/`**`THIS_PART`**`/edit`. That is `SHEET_ID`.
+On <https://backpocket.futurdevs.com> (Base collection). Fields:
 
-The function writes into the **first tab**. If cell A1 is empty it writes the header row first:
-`Submitted at (WAT), Business, Type, What they sell, City, Page goal, Customer worth, Content ready,
-Domain, Name, WhatsApp, Email, Referral, Decision`. Fill the `Decision` column by hand
-(chosen / backup / waitlist).
+| Field | Type | Notes |
+| --- | --- | --- |
+| `business` | Text | required, max 80 |
+| `type` | Text | required, max 60 |
+| `what` | Text | required, max 160 |
+| `city` | Text | required, max 60 |
+| `goal` | Text | required, max 80 |
+| `worth` | Text | max 40 |
+| `content` | Text | required, max 40 |
+| `domain` | Text | max 80 |
+| `name` | Text | required, max 80 |
+| `whatsapp` | Text | required, max 20 |
+| `email` | Email | optional |
+| `referral` | Text | max 160 |
+| `agree` | Bool | required |
+| `decision` | Select | `chosen`, `backup`, `waitlist`. You fill this in. |
+| `created` | Autodate | set on create |
 
-## 2. Resend
+**API rules.** Leave list, view, update and delete empty (superuser only). Set **Create rule** to:
 
-1. Sign up at <https://resend.com> and open **Domains > Add domain**: `futurdevs.com`.
-2. Resend shows DNS records (SPF `TXT`, DKIM `TXT`, and an MX for the `send` subdomain). Add them at
-   whoever hosts the DNS for futurdevs.com. Click **Verify** (can take a few minutes up to a few hours).
-3. **API Keys > Create API key**, permission "Sending access", domain `futurdevs.com`. Copy it. That is `RESEND_API_KEY`.
-4. `NOTIFY_EMAIL` is where applications are sent: `davidjohn@futurdevs.com`.
+```
+@request.headers.x_free_websites_key = "PASTE_YOUR_SECRET_HERE" && @request.body.decision:isset = false
+```
 
-Emails are sent from `Five Free Websites <apply@futurdevs.com>`. Any address on the verified domain
-works. To change it, set the optional `FROM_EMAIL` variable.
+Generate the secret with `openssl rand -hex 24`. The second condition stops a caller from setting `decision`.
+Check it: a request without the header must return 400 or 403, and one with the header must return 200:
+
+```sh
+curl -i -X POST https://backpocket.futurdevs.com/api/collections/free_websites_applications/records \
+  -H 'Content-Type: application/json' -H 'X-Free-Websites-Key: <secret>' \
+  -d '{"business":"Test","type":"t","what":"w","city":"c","goal":"g","content":"c","name":"n","whatsapp":"08031234567","agree":true}'
+```
+
+Delete the test record afterwards.
+
+## 2. PocketBase email
+
+1. **Settings > Mail settings**: set the sender name and address and your SMTP server, then **Send test email**.
+   Also set **Application URL** under Settings > Application (the email links to it).
+2. Copy `pocketbase/free_websites_notify.pb.js` from this repo into `pb_hooks/` next to your PocketBase binary.
+   PocketBase reloads hooks on change (restart it if your setup does not).
+3. Create a test record from the dashboard and check that the email arrives. If it does not, look in the
+   PocketBase logs (Dashboard > Logs) for `free_websites_notify failed`.
+
+The recipient is set at the top of the hook file (`NOTIFY`).
 
 ## 3. Vercel environment variables
 
-In the Vercel dashboard: your project > **Settings > Environment Variables**. Add each of these for
-**Production and Preview** (Preview is needed so the preview deployment can be tested):
+In the Vercel dashboard: project > **Settings > Environment Variables**. Add for **Production and Preview**:
 
 | Name | Value |
 | --- | --- |
-| `GOOGLE_SERVICE_ACCOUNT_EMAIL` | `client_email` from the JSON key |
-| `GOOGLE_PRIVATE_KEY` | `private_key` from the JSON key. Paste it as is, with the `\n` escapes. The code converts them. |
-| `SHEET_ID` | id from the sheet URL |
-| `RESEND_API_KEY` | Resend API key |
-| `NOTIFY_EMAIL` | `davidjohn@futurdevs.com` |
+| `POCKETBASE_URL` | `https://backpocket.futurdevs.com` |
+| `POCKETBASE_CREATE_KEY` | the same secret as in the create rule (mark **Sensitive**) |
 
-Mark the key variables **Sensitive**. Env var changes apply to **new** deployments only, so redeploy after adding them.
+Env var changes apply to new deployments only, so redeploy afterwards.
+CLI alternative: `vercel env add POCKETBASE_CREATE_KEY preview`.
 
-CLI alternative: `vercel env add GOOGLE_PRIVATE_KEY preview` (repeat per variable and environment).
+## 4. Hard rate limit (recommended)
 
-## 4. Hard rate limit (recommended, 2 minutes)
-
-The function has an in-memory limit of 5 applications per IP per 10 minutes. That limit is per warm
-instance, so it stops double-submits and casual spam but not a determined bot. On the Pro plan, add a
-Firewall rule: **Project > Firewall > Add rule**, if **Request path** equals `/api/free-websites/apply`
-and **Method** equals `POST`, then **Rate limit**: 5 requests per 10 minutes per IP, action Deny (or Challenge).
+The function has an in-memory limit of 5 applications per IP per 10 minutes, per warm instance, so it stops
+double-submits and casual spam but not a determined bot. Anyone who learns the secret could also post
+straight to PocketBase, so keep it out of the repo and rotate it (change it in the rule and in Vercel) if it leaks.
+On the Pro plan, add a Firewall rule: **Project > Firewall > Add rule**, if **Request path** equals
+`/api/free-websites/apply` and **Method** equals `POST`, then **Rate limit** 5 requests per 10 minutes per IP.
 
 ## 5. Test it
 
 After redeploying with the variables set:
 
 1. Open the preview URL `/free-websites/`, fill the form, submit.
-2. Check: a new row in the sheet, and an email with the business name in the subject.
+2. Check: a new record in `free_websites_applications` and the email.
 3. Or from a terminal (replace the host):
 
 ```sh
@@ -78,31 +93,30 @@ curl -sS -X POST https://<preview-host>/api/free-websites/apply \
 # {"ok":true}
 ```
 
-Preview deployments sit behind Vercel Deployment Protection by default. Use the browser while logged
-in to Vercel, or a protection-bypass token for curl. Delete test rows from the sheet afterwards.
+Preview deployments sit behind Vercel Deployment Protection by default. Use the browser while logged in to
+Vercel, or a protection-bypass token for curl. Delete test records afterwards.
 
 ## Troubleshooting
 
-Look at **Vercel > Deployments > (deployment) > Functions / Logs**, filter for `[free-websites]`.
+Vercel > Deployments > (deployment) > Logs, filter for `[free-websites]`.
 
 | Log line | Cause |
 | --- | --- |
-| `sheet write failed: ... 403 / The caller does not have permission` | Sheet not shared with the service account as Editor |
-| `sheet write failed: ... 404 / Requested entity was not found` | Wrong `SHEET_ID` |
-| `sheet write failed: ... DECODER routines` or `invalid_grant` | `GOOGLE_PRIVATE_KEY` pasted wrong, or key deleted |
-| `Google Sheets env vars are not set` | Variables missing for this environment, or no redeploy since adding them |
-| `email failed: Resend 403 ... domain is not verified` | futurdevs.com not verified in Resend yet |
-| `email failed: Resend 401` | Wrong or revoked `RESEND_API_KEY` |
-| `application NOT saved anywhere` | Both failed. The full application is in that log line, copy it out by hand |
+| `PocketBase 400` or `403` | Secret in Vercel differs from the create rule, or the rule is empty or has a typo |
+| `PocketBase 400: ...` with field names | A collection field does not match (required field renamed, max length lowered) |
+| `PocketBase 404` | The collection does not exist or was renamed |
+| `POCKETBASE_URL is not set` / `POCKETBASE_CREATE_KEY is not set` | Variable missing for this environment, or no redeploy since adding it |
+| `The operation was aborted` | PocketBase unreachable (8 second timeout) |
+| `application NOT saved` | The save failed. The full application is in that log line, copy it out by hand |
 
 ## Local development
 
 - `npm run dev` serves the page at <http://localhost:5173/free-websites/>. The API does not run under plain Vite.
 - `vercel dev` runs the page and the function together. Put values in `.env.local` (see `.env.example`).
-- `npm test` runs the API tests (validation, rate limit, formatting, handler behaviour with mocks).
+- `npm test` runs the API tests.
 
 ## Changing the form
 
-Field names are the contract between `public/free-websites/index.html` and `api/_lib/validate.ts`.
-If you add or rename a field, update `validate.ts`, `format.ts` (`SHEET_COLUMNS`, `toRow`, email), and the tests.
-The honeypot input is named `hp_url`. Keep it hidden and empty.
+Field names are the contract between `public/free-websites/index.html`, `api/_lib/validate.ts`,
+`api/_lib/pocketbase.ts` (`toRecord`), the PocketBase collection, and the email hook. Change them together,
+and update the tests. The honeypot input is named `hp_url`. Keep it hidden and empty.
