@@ -38,7 +38,7 @@ describe('pocketbase', () => {
     await createApplication(app)
     expect(calls.filter((c) => c.includes('/records'))).toHaveLength(2)
     expect(calls.filter((c) => c.includes('auth-with-password')).length).toBeGreaterThanOrEqual(1)
-    expect(calls.at(-1)).toBe('POST /api/collections/applications/records')
+    expect(calls.at(-1)).toBe('POST /api/collections/free_websites_applications/records')
   })
 
   it('throws with the status when PocketBase rejects the record', async () => {

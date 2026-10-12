@@ -10,7 +10,7 @@ You need about 15 minutes. Do these in order.
 
 ## 1. PocketBase
 
-Applications are stored in the `applications` collection on <https://backpocket.futurdevs.com>
+Applications are stored in the `free_websites_applications` collection on <https://backpocket.futurdevs.com>
 (already created, with every API rule empty so only a superuser can read or write).
 
 | Field | Type | Notes |
@@ -79,7 +79,7 @@ and **Method** equals `POST`, then **Rate limit**: 5 requests per 10 minutes per
 After redeploying with the variables set:
 
 1. Open the preview URL `/free-websites/`, fill the form, submit.
-2. Check: a new record in PocketBase (`applications`), and an email with the business name in the subject.
+2. Check: a new record in PocketBase (`free_websites_applications`), and an email with the business name in the subject.
 3. Or from a terminal (replace the host):
 
 ```sh
@@ -100,7 +100,7 @@ Look at **Vercel > Deployments > (deployment) > Functions / Logs**, filter for `
 | --- | --- |
 | `PocketBase save failed: PocketBase login 400` | Wrong `POCKETBASE_EMAIL` / `POCKETBASE_PASSWORD`, or the user is not in `_superusers` |
 | `PocketBase save failed: PocketBase 400: ...` | A field in the collection does not match (required field renamed, max length lowered) |
-| `PocketBase save failed: PocketBase 404` | The `applications` collection does not exist |
+| `PocketBase save failed: PocketBase 404` | The `free_websites_applications` collection does not exist |
 | `POCKETBASE_URL is not set` / `... are not set` | Variables missing for this environment, or no redeploy since adding them |
 | `PocketBase save failed: ... The operation was aborted` | PocketBase unreachable (8 second timeout) |
 | `email failed: Resend 403 ... domain is not verified` | futurdevs.com not verified in Resend yet |

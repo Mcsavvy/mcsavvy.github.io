@@ -1,6 +1,6 @@
 import type { Application } from './validate.js'
 
-const COLLECTION = 'applications'
+const COLLECTION = 'free_websites_applications'
 
 let cached: { token: string; exp: number } | null = null
 
