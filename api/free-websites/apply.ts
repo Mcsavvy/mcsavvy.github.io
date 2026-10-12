@@ -1,8 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { sendNotification } from '../_lib/email.js'
-import { toRow } from '../_lib/format.js'
+import { createApplication } from '../_lib/pocketbase.js'
 import { createLimiter } from '../_lib/ratelimit.js'
-import { appendRow } from '../_lib/sheet.js'
 import { isHoneypotFilled, validate } from '../_lib/validate.js'
 
 // 5 applications per IP per 10 minutes (per warm instance, see ratelimit.ts).
@@ -64,23 +63,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const submitted = new Date()
   const app = result.data
 
-  let sheetError: string | null = null
+  let saveError: string | null = null
   try {
-    await appendRow(toRow(app, submitted))
+    await createApplication(app)
   } catch (e) {
-    sheetError = message(e)
-    console.error('[free-websites] sheet write failed:', sheetError)
+    saveError = message(e)
+    console.error('[free-websites] PocketBase save failed:', saveError)
   }
 
   let emailError: string | null = null
   try {
-    await sendNotification(app, submitted, sheetError)
+    await sendNotification(app, submitted, saveError)
   } catch (e) {
     emailError = message(e)
     console.error('[free-websites] email failed:', emailError)
   }
 
-  if (sheetError && emailError) {
+  if (saveError && emailError) {
     // Last resort so the application can still be recovered from the function logs.
     console.error('[free-websites] application NOT saved anywhere:', JSON.stringify({ submittedAt: submitted.toISOString(), ...app }))
     return res.status(502).json({ ok: false, error: 'Could not save the application' })

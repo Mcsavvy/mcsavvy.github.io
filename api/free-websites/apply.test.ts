@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-const appendRow = vi.fn()
+const createApplication = vi.fn()
 const sendNotification = vi.fn()
-vi.mock('../_lib/sheet.js', () => ({ appendRow }))
+vi.mock('../_lib/pocketbase.js', () => ({ createApplication }))
 vi.mock('../_lib/email.js', () => ({ sendNotification }))
 
 const { default: handler } = await import('./apply')
@@ -49,25 +49,25 @@ function call(over: { method?: string; body?: unknown; headers?: Record<string, 
 }
 
 beforeEach(() => {
-  appendRow.mockReset().mockResolvedValue(undefined)
+  createApplication.mockReset().mockResolvedValue(undefined)
   sendNotification.mockReset().mockResolvedValue(undefined)
   vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
 describe('POST /api/free-websites/apply', () => {
-  it('saves to the sheet and emails on a valid application', async () => {
+  it('saves to PocketBase and emails on a valid application', async () => {
     const r = await call()
     expect(r.status).toBe(200)
-    expect(appendRow).toHaveBeenCalledOnce()
+    expect(createApplication).toHaveBeenCalledOnce()
     expect(sendNotification).toHaveBeenCalledOnce()
     expect(sendNotification.mock.calls[0][2]).toBeNull()
   })
 
-  it('still emails when the sheet write fails, and says so in the email', async () => {
-    appendRow.mockRejectedValue(new Error('403 not shared'))
+  it('still emails when the PocketBase save fails, and says so in the email', async () => {
+    createApplication.mockRejectedValue(new Error('401 bad login'))
     const r = await call()
     expect(r.status).toBe(200)
-    expect(sendNotification.mock.calls[0][2]).toBe('403 not shared')
+    expect(sendNotification.mock.calls[0][2]).toBe('401 bad login')
   })
 
   it('still succeeds when only the email fails', async () => {
@@ -76,7 +76,7 @@ describe('POST /api/free-websites/apply', () => {
   })
 
   it('returns 502 and logs the payload when both fail', async () => {
-    appendRow.mockRejectedValue(new Error('a'))
+    createApplication.mockRejectedValue(new Error('a'))
     sendNotification.mockRejectedValue(new Error('b'))
     const r = await call()
     expect(r.status).toBe(502)
@@ -86,7 +86,7 @@ describe('POST /api/free-websites/apply', () => {
   it('fakes success for honeypot hits and stores nothing', async () => {
     const r = await call({ body: { ...body, hp_url: 'http://spam.example' } })
     expect(r.status).toBe(200)
-    expect(appendRow).not.toHaveBeenCalled()
+    expect(createApplication).not.toHaveBeenCalled()
     expect(sendNotification).not.toHaveBeenCalled()
   })
 
@@ -94,7 +94,7 @@ describe('POST /api/free-websites/apply', () => {
     const r = await call({ body: { ...body, whatsapp: '123', agree: 'no' } })
     expect(r.status).toBe(400)
     expect(Object.keys((r.json as { errors: object }).errors)).toEqual(expect.arrayContaining(['whatsapp', 'agree']))
-    expect(appendRow).not.toHaveBeenCalled()
+    expect(createApplication).not.toHaveBeenCalled()
   })
 
   it('accepts a JSON string body and rejects broken JSON', async () => {
