@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { isClosed } from '../_lib/closed.js'
 import { createApplication } from '../_lib/pocketbase.js'
 import { createLimiter } from '../_lib/ratelimit.js'
 import { isHoneypotFilled, validate } from '../_lib/validate.js'
@@ -37,6 +38,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
     if (host !== req.headers.host) return res.status(403).json({ ok: false, error: 'Forbidden' })
   }
+
+  if (isClosed()) return res.status(410).json({ ok: false, closed: true, error: 'Applications are closed' })
 
   const rl = limit(clientIp(req))
   if (!rl.allowed) {
