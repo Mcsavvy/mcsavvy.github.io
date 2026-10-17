@@ -2,7 +2,9 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const createApplication = vi.fn()
+const isClosed = vi.fn()
 vi.mock('../_lib/pocketbase.js', () => ({ createApplication }))
+vi.mock('../_lib/closed.js', () => ({ isClosed }))
 
 const { default: handler } = await import('./apply')
 
@@ -48,6 +50,7 @@ function call(over: { method?: string; body?: unknown; headers?: Record<string, 
 
 beforeEach(() => {
   createApplication.mockReset().mockResolvedValue(undefined)
+  isClosed.mockReset().mockReturnValue(false)
   vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
@@ -82,6 +85,14 @@ describe('POST /api/free-websites/apply', () => {
   it('accepts a JSON string body and rejects broken JSON', async () => {
     expect((await call({ body: JSON.stringify(body) })).status).toBe(200)
     expect((await call({ body: '{nope' })).status).toBe(400)
+  })
+
+  it('returns 410 and saves nothing once applications are closed', async () => {
+    isClosed.mockReturnValue(true)
+    const r = await call()
+    expect(r.status).toBe(410)
+    expect(r.json).toMatchObject({ ok: false, closed: true })
+    expect(createApplication).not.toHaveBeenCalled()
   })
 
   it('rejects other methods with 405', async () => {

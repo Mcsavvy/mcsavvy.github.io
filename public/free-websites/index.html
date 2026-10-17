@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" class="closed">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>5 Free Websites for Nigerian Businesses | David John</title>
-<meta name="description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Apply by 17 October 2026.">
+<meta name="description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Applications are now closed.">
 <link rel="canonical" href="https://davidjohn.futurdevs.com/free-websites/">
 <meta name="theme-color" content="#EEF2F8">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="David John">
 <meta property="og:locale" content="en_NG">
 <meta property="og:title" content="5 Free Websites for Nigerian Businesses | David John">
-<meta property="og:description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Apply by 17 October 2026.">
+<meta property="og:description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Applications are now closed.">
 <meta property="og:url" content="https://davidjohn.futurdevs.com/free-websites/">
 <meta property="og:image" content="https://davidjohn.futurdevs.com/free-websites/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@davemcsavvy">
 <meta name="twitter:title" content="5 Free Websites for Nigerian Businesses | David John">
-<meta name="twitter:description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Apply by 17 October 2026.">
+<meta name="twitter:description" content="I'm building a free one-page website for five Nigerian businesses: designed, built and live within 24 hours, with a domain and a year of hosting. Applications are now closed.">
 <meta name="twitter:image" content="https://davidjohn.futurdevs.com/free-websites/og.jpg">
 <meta name="twitter:image:alt" content="Five Free Websites by David John: a Lagos baker beside the website built for her bakery.">
 <link rel="preload" href="/free-websites/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -180,6 +180,15 @@ body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-weig
 img{display:block;max-width:100%}
 picture{display:contents}
 [hidden]{display:none!important}
+/* closed state: html.closed is set in the markup. Remove it to reopen the form. */
+.closed-only{display:none}
+html.closed .closed-only{display:block}
+html.closed .open-only{display:none!important}
+.closed-note{font-size:17px;line-height:1.55;color:var(--sec);max-width:34em;margin-top:clamp(26px,2.6vw,36px)}
+.closed-note b{color:var(--ink);font-weight:600}
+html.closed .pstep.now:after{content:"Closed";background:var(--hair);color:var(--sec)}
+html.closed .pulse{background:#B42318}
+html.closed .pulse:after{display:none}
 a{color:inherit}
 button{font:inherit}
 .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,3.5vw,40px)}
@@ -606,7 +615,7 @@ footer{padding:clamp(56px,6vw,88px) 0 40px;background:var(--ground)}
     </a>
     <div class="top-right">
       <div class="countdown" id="countdown" aria-live="polite"><span class="pulse"></span><span id="cd-text">Applications open until Sat 17 Oct</span></div>
-      <a class="btn" href="#apply">Apply</a>
+      <a class="btn open-only" href="#apply">Apply</a>
     </div>
   </div>
 </header>
@@ -619,7 +628,8 @@ footer{padding:clamp(56px,6vw,88px) 0 40px;background:var(--ground)}
       <div class="tag rise d1"><i>5 slots</i>Free websites for Nigerian businesses</div>
       <h1 class="rise d2">Your business is great in person. Let it <em>look</em> that way online.</h1>
       <p class="lead rise d3">I'm designing and building a one-page website for <b>five businesses, free</b>. Live in 24 hours, hosted, with a domain. You bring your logo, photos and a few words.</p>
-      <form class="start rise d4" id="start" novalidate>
+      <p class="closed-note closed-only rise d4"><b>Applications are closed.</b> Thank you to everyone who applied. I'll message every applicant on WhatsApp on Sun 18 Oct, whether or not you're chosen.</p>
+      <form class="start open-only rise d4" id="start" novalidate>
         <label for="start-biz">What's your business called?</label>
         <div class="start-row">
           <input id="start-biz" name="business" type="text" autocomplete="organization" placeholder="e.g. Bímpé's Bakehouse" maxlength="80">
@@ -840,17 +850,18 @@ footer{padding:clamp(56px,6vw,88px) 0 40px;background:var(--ground)}
   <div class="bg slot"><picture><source type="image/avif" srcset="/free-websites/img/cta-plate.avif"><source type="image/webp" srcset="/free-websites/img/cta-plate.webp"><img loading="lazy" decoding="async" src="/free-websites/img/cta-plate.jpg" width="768" height="328" alt="" onerror="this.closest('.slot').classList.add('missing')"></picture></div>
   <div class="wrap">
     <div class="apply">
-      <div class="label"><span class="num">06</span>5 slots · closes Sat 17 Oct</div>
-      <h2>Apply for a free website</h2>
-      <p class="apply-sub">Three short steps. I read every application and reply to everyone on Sun 18 Oct.</p>
+      <div class="label"><span class="num">06</span><span class="open-only">5 slots · closes Sat 17 Oct</span><span class="closed-only" style="display:inline">Applications closed</span></div>
+      <h2><span class="open-only">Apply for a free website</span><span class="closed-only">Applications are closed</span></h2>
+      <p class="apply-sub closed-only">Thank you to everyone who applied. I read every application and will message everyone on WhatsApp on Sun 18 Oct, whether or not you're chosen.</p>
+      <p class="apply-sub open-only">Three short steps. I read every application and reply to everyone on Sun 18 Oct.</p>
 
-      <ol class="progress" aria-label="Application progress">
+      <ol class="progress open-only" aria-label="Application progress">
         <li class="on" data-s="1"><span>1</span>Your business</li>
         <li data-s="2"><span>2</span>Your page</li>
         <li data-s="3"><span>3</span>Contact</li>
       </ol>
 
-      <form id="apply-form" novalidate>
+      <form id="apply-form" class="open-only" novalidate>
         <fieldset class="fstep" data-step="1">
           <legend class="sr">Your business</legend>
           <div class="field">
@@ -970,7 +981,7 @@ footer{padding:clamp(56px,6vw,88px) 0 40px;background:var(--ground)}
         <a href="#apply">Apply</a>
       </nav>
     </div>
-    <div class="legal"><span>Fractional CTO and Software Architect · Founder, FuturDevs · Lagos, Nigeria</span><span>Applications close Sat 17 Oct 2026</span></div>
+    <div class="legal"><span>Fractional CTO and Software Architect · Founder, FuturDevs · Lagos, Nigeria</span><span><span class="open-only" style="display:inline">Applications close Sat 17 Oct 2026</span><span class="closed-only" style="display:inline">Applications closed</span></span></div>
   </div>
 </footer>
 
@@ -984,7 +995,7 @@ footer{padding:clamp(56px,6vw,88px) 0 40px;background:var(--ground)}
   var deadline=new Date('2026-10-17T23:59:00+01:00').getTime(), cd=document.getElementById('cd-text');
   function tick(){
     var ms=deadline-Date.now();
-    if(ms<=0){ cd.textContent='Applications closed'; document.querySelector('.pulse').style.background='#B42318'; return; }
+    if(ms<=0||document.documentElement.classList.contains('closed')){ document.documentElement.classList.add('closed'); cd.textContent='Applications closed'; document.querySelector('.pulse').style.background='#B42318'; return; }
     var d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4);
     cd.textContent='Closes in '+(d>0? d+'d '+h+'h' : h+'h '+m+'m');
   }
@@ -1097,9 +1108,9 @@ var WHATSAPP = "2348088792254";
     }
     next.disabled=true; status.textContent='Sending your application…';
     fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error(r.status);
+      .then(function(r){ if(r.status===410){ document.documentElement.classList.add('closed'); throw 'closed'; } if(!r.ok) throw new Error(r.status);
         finish('Application received','Thank you'+(first?', '+first:'')+'. I\'ll message you on WhatsApp on Sun 18 Oct, whether or not you\'re chosen.'); })
-      .catch(function(){ status.textContent='That didn\'t send. Your answers are saved here, so try again in a moment, or message me on WhatsApp at 0808 879 2254.'; })
+      .catch(function(e){ if(e==='closed'){ status.textContent=''; document.getElementById('apply').scrollIntoView(); return; } status.textContent='That didn\'t send. Your answers are saved here, so try again in a moment, or message me on WhatsApp at 0808 879 2254.'; })
       .then(function(){ next.disabled=false; });
   });
 
