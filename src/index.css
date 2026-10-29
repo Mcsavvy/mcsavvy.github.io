@@ -199,8 +199,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
   .receipts-row,.more,.how{grid-template-columns:minmax(0,1fr)}
   .copy{font-size:17px}
 }
+
+/* ---------- reviews marquee ---------- */
+.marquees{display:flex; flex-direction:column; gap:18px; width:100cqi; margin-inline:calc(50% - 50cqi); overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee-track{display:flex; width:max-content; animation:marquee 38s linear infinite}
+.rev-back .marquee-track{animation-direction:reverse; animation-duration:44s}
+.marquees:hover .marquee-track,.marquees:focus-within .marquee-track{animation-play-state:paused}
+.marquee-half{display:flex; gap:18px; padding-right:18px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.rev{width:360px; flex:none; margin:0; justify-content:space-between; gap:18px}
+.rev blockquote{margin:0; font-size:17px; line-height:1.45; color:var(--paper-ink)}
+.rev figcaption{display:flex; align-items:center; gap:12px}
+.rev-photo{width:44px; height:44px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex:none; border:1px solid var(--paper-line); background:var(--paper)}
+.rev-photo.contain{object-fit:cover; object-position:50% 50%}
+.rev-who{display:flex; flex-direction:column; font-size:13px; line-height:1.35; color:var(--paper-pencil); min-width:0}
+.rev-who b{font-size:14px; color:var(--paper-ink)}
+.rev-who a{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-decoration:underline; text-underline-offset:3px}
+@media (max-width:540px){.rev{width:300px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .marquees{-webkit-mask-image:none; mask-image:none; overflow-x:auto}
+  .marquee-track{animation:none}
+  .marquee-half[aria-hidden]{display:none}
   .pen-underline path{animation:none; stroke-dashoffset:0}
   .more-wrap,.more-toggle .chev,.t-cta,.btn-main{transition:none}
   .more-wrap.open .card{animation:none}
