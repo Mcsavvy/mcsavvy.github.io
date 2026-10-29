@@ -223,7 +223,7 @@ export const steps = [
   {
     n: '02',
     title: 'Architecture',
-    text: 'You get a plan you can see: what we build first, what waits, and what it costs. Then we agree the first version's scope, so the project stays focused and ships.',
+    text: 'You get a plan you can see: what we build first, what waits, and what it costs. Then we agree the scope of the first version, so the project stays focused and ships.',
   },
   {
     n: '03',
