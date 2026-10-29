@@ -12,7 +12,7 @@ function Card({ r }: { r: Review }) {
     <figure className="rev tile">
       <blockquote>{r.quote}</blockquote>
       <figcaption>
-        <img className={`rev-photo${r.fit === 'contain' ? ' contain' : ''}`} src={r.photo} alt="" width="44" height="44" loading="lazy" />
+        <img className="rev-photo" src={r.photo} alt="" width="44" height="44" loading="lazy" />
         <span className="rev-who">
           <b>{r.name}</b>
           <span>{r.role}, {r.org}</span>

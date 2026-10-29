@@ -30,7 +30,6 @@ export type Review = {
   org: string
   site: string // reviewer's own website
   photo: string
-  fit?: 'cover' | 'contain'
 }
 
 const ejGreat = {
@@ -46,7 +45,6 @@ const inom = {
   org: 'INOM',
   site: 'https://inomltd.futurdevs.com',
   photo: '/reviews/inom.webp',
-  fit: 'contain' as const,
 }
 
 export const reviews: Review[] = [
