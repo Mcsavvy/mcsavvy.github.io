@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import { featured, more } from '../../content'
 
+function Story({ html }: { html: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <p className={`story${open ? ' open' : ''}`} dangerouslySetInnerHTML={{ __html: html }} />
+      <button className="read-more" type="button" aria-expanded={open} onClick={() => setOpen(!open)}>
+        {open ? 'Less' : 'Read more'}
+      </button>
+    </>
+  )
+}
+
 export default function Work() {
   const [open, setOpen] = useState(false)
   const section = useRef<HTMLElement>(null)
@@ -28,7 +40,7 @@ export default function Work() {
         <p>Money that has to move safely, a school mid-term, a regulator at the door, an AI that keeps missing the right file. Each started with a question, not a spec.</p>
       </div>
 
-      <div className="work">
+      <div className="work swipe">
         {featured.map((p) => (
           <article className="tile proj" key={p.title}>
             <span className="tape" aria-hidden="true" />
@@ -48,7 +60,7 @@ export default function Work() {
               <span className="meta">{p.meta}</span>
               <h3>{p.title}</h3>
               {p.role && <span className="role">{p.role}</span>}
-              <p dangerouslySetInnerHTML={{ __html: p.story }} />
+              <Story html={p.story} />
               {p.moral && <span className="hand moral">{p.moral}</span>}
             </div>
           </article>
@@ -62,7 +74,7 @@ export default function Work() {
 
       <div className={`more-wrap${open ? ' open' : ''}`} id="more-work">
         <div className="more-inner" ref={inner}>
-          <div className="more">
+          <div className="more swipe">
             {more.map((m) => (
               <article className="card" key={m.title}>
                 {m.image ? (
@@ -82,7 +94,7 @@ export default function Work() {
                   <b>{m.kind}</b>
                 </span>
                 <h3>{m.title}</h3>
-                <p dangerouslySetInnerHTML={{ __html: m.story }} />
+                <Story html={m.story} />
                 {m.moral && <span className="hand moral">{m.moral}</span>}
               </article>
             ))}
