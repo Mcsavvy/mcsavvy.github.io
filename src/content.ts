@@ -15,7 +15,7 @@ export const contact = {
 }
 
 export const receipts = [
-  { big: '150+', unit: '', text: 'students on a school platform I rebuilt, still running two years on', underline: true },
+  { big: '150+', unit: '', text: 'students across two cohorts on a school platform I rebuilt, running for two years', underline: true },
   { big: '41', unit: '', text: 'inspection KPIs tracked for a UK home-care provider' },
   { big: 'UK · US · NG', unit: '', text: "founders and teams I've built for", small: true },
 ]
@@ -77,14 +77,14 @@ export const clientSites = [
 
 export const engagements = [
   { title: 'Build it with you', text: 'One partner from research to launch: product, design, architecture, engineering and deployment.', price: 'Projects from $10,000' },
-  { title: 'Fractional CTO', text: 'Ongoing technical leadership for a founder or a small team: decisions, architecture, hiring and reviews.', price: '' },
+  { title: 'Fractional CTO', text: "Senior technical leadership without hiring a full-time CTO. A weekly call, architecture and technology decisions, reviews of your code and plans, hiring support, and guidance for the team you already have. It runs month to month and doesn't include building the product; that's the option above.", price: 'From $2,500 a month' },
 ]
 
 export const faqs = [
   { q: "I'm not technical. Is that a problem?", a: "No. Most founders I work with aren't. I explain each decision in plain language, and you test the product as it grows, so you always know where it stands." },
   { q: 'Where are you based?', a: "Lagos, Nigeria (GMT+1). I've built for founders and teams in the UK, the US and Nigeria." },
   { q: 'Can you work with my existing developers?', a: "Yes. I've led and trained engineering teams, including senior engineers adopting AI, and handed a live service over to new engineers mid-project." },
-  { q: 'What does it cost?', a: "Projects start from $10,000, depending on what we build. You'll get a clear figure after the idea call, which is free, whether or not we work together." },
+  { q: 'What does it cost?', a: "Projects start from $10,000, depending on what we build. Fractional CTO work starts from $2,500 a month. You'll get a clear figure after the idea call, which is free, whether or not we work together." },
   { q: 'Who owns the code?', a: 'You do. All the code I write for your product is yours.' },
 ]
 
@@ -104,7 +104,7 @@ export const featured: Project[] = [
     title: 'PLSOM, a learning platform for a ministry school',
     role: 'Design · Architecture · DevOps · Engineering',
     story:
-      "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>Hundreds of students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
+      "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>150+ students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
     moral: 'The best rebuilds are the ones nobody notices.',
     shot: 'Student dashboard',
     image: '/plsom-dashboard.webp',
@@ -223,7 +223,7 @@ export const steps = [
   {
     n: '02',
     title: 'Architecture',
-    text: 'You get a plan you can see: what we build first, what waits, and what it costs. Then I freeze the first version, so it ships.',
+    text: 'You get a plan you can see: what we build first, what waits, and what it costs. Then we agree the scope of the first version, so the project stays focused and ships.',
   },
   {
     n: '03',
@@ -239,12 +239,12 @@ export const steps = [
 
 export const about = {
   heading: ['The demo worked.', 'Then real people showed up.'],
-  lead: "I've seen how easy it is to get a founder excited about a demo. The hard part comes when people start using it for real.",
+  lead: 'Getting a founder excited about a demo is easy. Everything works, the idea looks good, and everyone wants to start.',
   body: [
-    'An agency, a freelancer, or an AI tool can say yes pretty quickly. The bill often comes later, when real users, real money, or a regulator get involved.',
-    "I start by asking what the product should earn or save you, and what you've already tried. Then I write back what I understood. Nothing gets built until you confirm I've got it right.",
-    "From there, we agree on what belongs in the first version so it can ship without growing forever. I've done this for a school in Nigeria whose platform has run for two years, a care provider in the UK, and a credit platform for Nigerian customers.",
-    'I taught myself to code and have spent years teaching others.',
+    'Then users arrive. Money starts moving. Someone asks for a report, or hits a case nobody thought of during the demo. That is where the real work starts.',
+    "So I make the big decisions early, before they get expensive. I ask what the product should earn or save you and what you've already tried, then write back what I understood. Nothing gets built until you confirm it.",
+    "We agree what goes in the first version so it ships instead of growing forever. I've done this for a school in Nigeria whose platform has run for two years, a care provider in the UK, and a credit platform for Nigerian customers.",
+    'I taught myself to code and have spent years teaching others, so I explain every decision in plain language.',
   ],
-  close: "You're paying for the decisions behind the work.",
+  close: "You're not just paying for code. You're paying for the decisions that make the code worth building.",
 }
