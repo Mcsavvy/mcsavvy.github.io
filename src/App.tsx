@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { PencilFilter } from './components/Pencil'
 import Hero from './components/sections/Hero'
 import Work from './components/sections/Work'
+import Sites from './components/sections/Sites'
 import Reviews from './components/sections/Reviews'
 import Process from './components/sections/Process'
 import Engagements from './components/sections/Engagements'
@@ -17,6 +18,7 @@ function App() {
       <main>
         <Reviews />
         <Work />
+        <Sites />
         <About />
         <Process />
         <Engagements />
