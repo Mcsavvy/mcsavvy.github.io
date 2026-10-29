@@ -69,6 +69,12 @@ export const reviews: Review[] = [
   { ...inom, avatar: 'photo', quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
 ]
 
+export const clientSites = [
+  { name: 'INOM', kind: 'Fashion label', host: 'inomltd.futurdevs.com', href: 'https://inomltd.futurdevs.com', image: '/inom-site.webp', alt: 'The INOM fashion label site on a phone-sized screen' },
+  { name: 'E.J Great', kind: 'Interior and furniture', host: 'ejgreat.futurdevs.com', href: 'https://ejgreat.futurdevs.com', image: '/ejgreat-site.webp', alt: 'The E.J Great interior and furniture site' },
+  { name: 'Angela Barnabas', kind: 'Model', host: 'angela.futurdevs.com', href: 'https://angela.futurdevs.com', image: '/angela-site.webp', alt: 'The Angela Barnabas modelling site' },
+]
+
 export const engagements = [
   { title: 'Build it with you', text: 'One partner from research to launch: product, design, architecture, engineering and deployment.', price: 'Projects from $10,000' },
   { title: 'Fractional CTO', text: 'Ongoing technical leadership for a founder or a small team: decisions, architecture, hiring and reviews.', price: '' },

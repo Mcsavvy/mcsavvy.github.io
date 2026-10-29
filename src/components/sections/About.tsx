@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { about } from '../../content'
 import { Underline } from '../Pencil'
 
 export default function About() {
+  const [open, setOpen] = useState(false)
   return (
     <section className="sec" id="about" aria-labelledby="about-h">
       <span className="label">About David</span>
@@ -13,12 +15,15 @@ export default function About() {
             <Underline />
           </span>
         </h2>
-        <div className="copy">
+        <div className={`copy${open ? ' open' : ''}`}>
           <p className="lead">{about.lead}</p>
           {about.body.map((t) => (
-            <p key={t}>{t}</p>
+            <p className="rest" key={t}>{t}</p>
           ))}
           <p className="close">{about.close}</p>
+          <button className="read-more" type="button" aria-expanded={open} onClick={() => setOpen(!open)}>
+            {open ? 'Less' : 'Read more'}
+          </button>
         </div>
       </div>
     </section>
