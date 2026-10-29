@@ -52,8 +52,9 @@ export default function Hero() {
             I turn your idea into a product people <em>actually use.</em>
           </h1>
           <p>
-            You come with “is this even possible?” I ask what it should earn or save you, then tell you what to
-            build, what to skip, and how to keep it standing once real people use it.
+            You bring the idea. I help you work out what it&rsquo;s worth, what to build first, and how to build it so it
+            holds up. I&rsquo;m a Fractional CTO and software architect, so I can build it with you or guide the team
+            you already have.
           </p>
         </div>
 
