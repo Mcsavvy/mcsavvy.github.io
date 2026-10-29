@@ -78,7 +78,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .proj:nth-child(1){transform:rotate(-.5deg)} .proj:nth-child(2){transform:rotate(.6deg); margin-top:36px}
 .proj:nth-child(3){transform:rotate(.4deg)} .proj:nth-child(4){transform:rotate(-.6deg); margin-top:36px}
 .proj .tape{top:-9px; left:50%; transform:translateX(-50%) rotate(-3deg)}
-.shot{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; margin-bottom:24px}
+.shot{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; margin-bottom:24px}
 .shot.placeholder{display:flex; align-items:flex-end; padding:12px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; line-height:1.4; color:var(--paper-pencil);
   background:repeating-linear-gradient(135deg,var(--paper-line) 0 1px,transparent 1px 11px), #E6ECF4; border:1px dashed var(--paper-line)}
 .shot.placeholder b{display:block; color:var(--paper-ink); font-weight:500}
