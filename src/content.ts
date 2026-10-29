@@ -30,6 +30,8 @@ export type Review = {
   org: string
   site: string // reviewer's own website
   photo: string
+  logo: string
+  avatar: 'photo' | 'logo' // each reviewer alternates between their face and their brand
 }
 
 const ejGreat = {
@@ -38,24 +40,26 @@ const ejGreat = {
   org: 'E.J Great Interior & Furniture',
   site: 'https://ejgreat.futurdevs.com',
   photo: '/reviews/kolawole-olumuyiwa.webp',
+  logo: '/reviews/ejgreat-logo.webp',
 }
 const inom = {
   name: 'Monijesuloluwa Ayinde',
   role: 'Fashion designer',
   org: 'INOM',
   site: 'https://inomltd.futurdevs.com',
-  photo: '/reviews/inom.webp',
+  photo: '/reviews/inom-moni.webp',
+  logo: '/reviews/inom-logo.webp',
 }
 
 export const reviews: Review[] = [
-  { ...ejGreat, quote: 'David understood our vision, turned our ideas into reality and delivered an excellent result in a remarkably short time.' },
-  { ...inom, quote: 'I had my website barely two days after sending my details, and I\u2019m genuinely impressed by what David made of so little insight into my business.' },
-  { ...ejGreat, quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
-  { ...inom, quote: 'The website has personality. You can see how much creativity and extra effort went into it.' },
-  { ...ejGreat, quote: 'He didn\u2019t just build us a website. He helped us build a stronger digital presence that showcases our services and positions us for growth.' },
-  { ...inom, quote: 'Every button works, and works fast. Email, TikTok, Instagram: other people have tested them too.' },
-  { ...ejGreat, quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.' },
-  { ...inom, quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
+  { ...ejGreat, avatar: 'photo', quote: 'David understood our vision, turned our ideas into reality and delivered an excellent result in a remarkably short time.' },
+  { ...inom, avatar: 'photo', quote: 'I had my website barely two days after sending my details, and I\u2019m genuinely impressed by what David made of so little insight into my business.' },
+  { ...ejGreat, avatar: 'logo', quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
+  { ...inom, avatar: 'logo', quote: 'The website has personality. You can see how much creativity and extra effort went into it.' },
+  { ...ejGreat, avatar: 'logo', quote: 'He didn\u2019t just build us a website. He helped us build a stronger digital presence that showcases our services and positions us for growth.' },
+  { ...inom, avatar: 'logo', quote: 'Every button works, and works fast. Email, TikTok, Instagram: other people have tested them too.' },
+  { ...ejGreat, avatar: 'photo', quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.' },
+  { ...inom, avatar: 'photo', quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
 ]
 
 export const engagements = [

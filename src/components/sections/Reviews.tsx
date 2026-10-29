@@ -3,8 +3,9 @@ import { reviews, type Review } from '../../content'
 // Two rows drifting in opposite directions. Each row's cards are rendered twice and the track
 // slides by exactly half its width, so the loop has no visible seam. The second copy is hidden
 // from assistive tech and the tab order.
-const rowA = reviews.filter((_, i) => i % 2 === 0)
-const rowB = reviews.filter((_, i) => i % 2 === 1)
+// both brands appear in each strip: cards 0,1 and 4,5 on top, 2,3 and 6,7 below
+const rowA = reviews.filter((_, i) => i % 4 < 2)
+const rowB = reviews.filter((_, i) => i % 4 >= 2)
 
 function Card({ r }: { r: Review }) {
   const host = r.site.replace(/^https?:\/\//, '')
@@ -12,7 +13,7 @@ function Card({ r }: { r: Review }) {
     <figure className="rev tile">
       <blockquote>{r.quote}</blockquote>
       <figcaption>
-        <img className="rev-photo" src={r.photo} alt="" width="44" height="44" loading="lazy" />
+        <img className={`rev-photo${r.avatar === 'logo' ? ' logo' : ''}`} src={r[r.avatar]} alt="" width="44" height="44" loading="lazy" />
         <span className="rev-who">
           <b>{r.name}</b>
           <span>{r.role}, {r.org}</span>

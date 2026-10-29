@@ -212,6 +212,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .rev blockquote{margin:0; font-size:17px; line-height:1.45; color:var(--paper-ink)}
 .rev figcaption{display:flex; align-items:center; gap:12px}
 .rev-photo{width:44px; height:44px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex:none; border:1px solid var(--paper-line); background:var(--paper)}
+.rev-photo.logo{object-fit:contain; padding:4px; background:var(--sheet)}
 .rev-who{display:flex; flex-direction:column; font-size:13px; line-height:1.35; color:var(--paper-pencil); min-width:0}
 .rev-who b{font-size:14px; color:var(--paper-ink)}
 .rev-who a{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-decoration:underline; text-underline-offset:3px}
