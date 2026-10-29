@@ -4,13 +4,18 @@ import { reviews, type Review } from '../../content'
 // slides by exactly half its width, so the loop has no visible seam. The second copy is hidden
 // from assistive tech and the tab order.
 // both brands appear in each strip: cards 0,1 and 4,5 on top, 2,3 and 6,7 below
+// card width 360 plus the 18px gap
+const CARD_SPAN = 378
 const rowA = reviews.filter((_, i) => i % 4 < 2)
 const rowB = reviews.filter((_, i) => i % 4 >= 2)
 
-function Card({ r }: { r: Review }) {
+// React 18 does not know the `inert` attribute, so it is spread in untyped.
+const inertProps = { inert: '' } as object
+
+function Card({ r, copy }: { r: Review; copy?: boolean }) {
   const host = r.site.replace(/^https?:\/\//, '')
   return (
-    <figure className="rev tile">
+    <figure className="rev tile" {...(copy ? { 'aria-hidden': true, ...inertProps } : {})}>
       <blockquote>{r.quote}</blockquote>
       <figcaption>
         <img className={`rev-photo${r.avatar === 'logo' ? ' logo' : ''}`} src={r[r.avatar]} alt="" width="44" height="44" loading="lazy" />
@@ -25,21 +30,16 @@ function Card({ r }: { r: Review }) {
 }
 
 function Row({ items, reverse }: { items: Review[]; reverse?: boolean }) {
-  // repeat so one half is always wider than a wide screen
-  const half = [...items, ...items]
+  // repeat the items until one half is wider than a large screen; only the first pass is real
+  // content, every other card is a hidden copy that keeps the loop seamless
+  const passes = Math.max(2, Math.ceil(2800 / (items.length * CARD_SPAN)))
+  const half = (real: boolean) =>
+    Array.from({ length: passes }, (_, p) => items.map((r, i) => <Card r={r} copy={!real || p > 0} key={`${p}-${i}`} />))
   return (
     <div className={`marquee${reverse ? ' rev-back' : ''}`}>
       <div className="marquee-track">
-        <div className="marquee-half">
-          {half.map((r, i) => (
-            <Card r={r} key={i} />
-          ))}
-        </div>
-        <div className="marquee-half" aria-hidden="true" {...({ inert: '' } as object)}>
-          {half.map((r, i) => (
-            <Card r={r} key={i} />
-          ))}
-        </div>
+        <div className="marquee-half">{half(true)}</div>
+        <div className="marquee-half" aria-hidden="true">{half(false)}</div>
       </div>
     </div>
   )
@@ -57,8 +57,8 @@ export default function Reviews() {
         <p>Short, and in their own words.</p>
       </div>
       <div className="marquees">
-        <Row items={rowA} />
-        <Row items={rowB} reverse />
+        {rowA.length > 0 && <Row items={rowA} />}
+        {rowB.length > 0 && <Row items={rowB} reverse />}
       </div>
     </section>
   )

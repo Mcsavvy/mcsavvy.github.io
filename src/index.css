@@ -223,7 +223,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
   html{scroll-behavior:auto}
   .marquees{-webkit-mask-image:none; mask-image:none; overflow-x:auto}
   .marquee-track{animation:none}
-  .marquee-half[aria-hidden]{display:none}
+  .marquee-half[aria-hidden],.rev[aria-hidden]{display:none}
   .pen-underline path{animation:none; stroke-dashoffset:0}
   .more-wrap,.more-toggle .chev,.t-cta,.btn-main{transition:none}
   .more-wrap.open .card{animation:none}
