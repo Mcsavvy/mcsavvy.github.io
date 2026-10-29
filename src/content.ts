@@ -2,9 +2,11 @@
 
 export const contact = {
   email: 'davidjohn@futurdevs.com',
+  whatsappUrl: 'https://wa.me/2348088792254',
+  whatsappLabel: 'Or message me on WhatsApp',
   // "Is It Possible?" 30-minute idea call (Google Calendar booking page)
   bookingUrl: 'https://calendar.app.google/kk2oCLz1PuEsUuwL9',
-  bookingLabel: 'Book an \u201cIs It Possible?\u201d call',
+  bookingLabel: 'Book a free 30-minute idea call',
   links: [
     { label: 'LinkedIn', href: 'https://linkedin.com/in/davemcsavvy' },
     { label: 'GitHub', href: 'https://github.com/Mcsavvy' },
@@ -18,7 +20,12 @@ export const receipts = [
   { big: 'UK · US · NG', unit: '', text: "founders and teams I've built for", small: true },
 ]
 
-export const testimonial = { quote: '', name: '', role: '', org: '' }
+export const testimonial = {
+  quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.',
+  name: 'Kolawole Olumuyiwa',
+  role: 'Owner',
+  org: 'E.J Great Interior & Furniture',
+}
 
 // Client reviews, shortened from the full messages they sent me. Each review is split into
 // the points the reviewer made; wording stays theirs. Add a reviewer to the list and a new
@@ -94,7 +101,7 @@ export const featured: Project[] = [
       "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>Hundreds of students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
     moral: 'The best rebuilds are the ones nobody notices.',
     shot: 'Student dashboard (illustrative design)',
-    image: '/plsom-dashboard.jpg',
+    image: '/plsom-dashboard.webp',
   },
   {
     meta: 'Fintech · Nigeria',
@@ -102,9 +109,9 @@ export const featured: Project[] = [
     role: 'Design · Architecture · Engineering',
     story:
       'A new credit platform gets one chance. If money moves wrong once, users leave. I built the parts that decide whether money is safe to move: a fraud engine that watches every transaction, a credit score people can verify, and rewards that turn paying on time into a habit. New fraud rules ran in watch-only mode first, so an honest customer never got blocked by a guess. <strong>Over a thousand transactions</strong> have gone through it ahead of the wider launch.',
-    moral: 'Trust is a feature. I build it in from day one.',
+    moral: '',
     shot: 'Credit score, rewards and fraud rules (illustrative design)',
-    image: '/creditveto-product.jpg',
+    image: '/creditveto-product.webp',
   },
   {
     meta: 'AI · Knowledge work',
@@ -114,7 +121,7 @@ export const featured: Project[] = [
       'The team had documents in every format and one frustration: the AI search found something, but rarely the right thing. It missed exact names and buried the file people needed. I stopped treating it as a model problem. I led the project. We paired keyword search with meaning-based search, then let the assistant ask for the next page of results the way a person would. <strong>Two organisations</strong> now pilot it.',
     moral: 'When AI disappoints, the fix is usually the system around it.',
     shot: 'Assistant answering a question',
-    image: '/ali-assistant.jpg',
+    image: '/ali-assistant.webp',
   },
   {
     meta: 'Healthcare compliance · UK',
@@ -124,7 +131,7 @@ export const featured: Project[] = [
       "A care provider faces inspectors with one question: can you prove it? Spreadsheets can't. I designed a system where every incident and complaint leaves a record no one can edit later, and problems rise to the right manager before they become findings. It tracks <strong>41 KPIs</strong> across the regulator's five domains, so inspection day becomes a printout instead of a scramble. Built, delivered and ready for rollout.",
     moral: 'In regulated work, the product is the proof.',
     shot: 'Director fleet view with an escalated alert (illustrative design)',
-    image: '/trakitt-dashboard.jpg',
+    image: '/trakitt-dashboard.webp',
   },
 ]
 
@@ -145,9 +152,9 @@ export const more: MoreProject[] = [
     title: 'LexiLead, practice management for law firms',
     story:
       "One missed filing deadline can lose a case and a client. LexiLead tracks every limitation period and flags a conflict of interest before a lawyer accepts the brief. I lead the backend and DevOps and manage the technical product, working alongside a frontend engineer. It's in pilot now.",
-    moral: "Guard what they can't afford to lose.",
+    moral: '',
     shot: 'Limitation-deadline alert or conflict check',
-    image: '/lexilead-conflicts.jpg',
+    image: '/lexilead-conflicts.webp',
   },
   {
     meta: 'Fintech · Nigeria',
@@ -155,9 +162,9 @@ export const more: MoreProject[] = [
     title: 'MyFinbuk, bookkeeping for small businesses',
     story:
       'Small traders lose signal more often than they lose receipts. I founded MyFinbuk and served as its CTO and technical lead, engineering the product and running the infrastructure. It keeps working offline, syncs the moment the network returns, and asks the trader which version to keep when two edits collide.',
-    moral: 'Design for the street, not the demo.',
+    moral: '',
     shot: 'Saved offline, conflict review, synced (illustrative design)',
-    image: '/myfinbuk-offline.jpg',
+    image: '/myfinbuk-offline.webp',
   },
   {
     meta: 'AI · Developer tools',
@@ -165,9 +172,9 @@ export const more: MoreProject[] = [
     title: 'Kloudfarm, AI that understands codebases',
     story:
       'Kloudfarm turns a codebase into a live architecture diagram. As the core backend and cloud infrastructure engineer, I built the ingestion service for GitHub and zip uploads, moved vectorization onto AWS Step Functions and ran the AWS infrastructure. Midway through, the other engineers left. I stayed, owned the service and brought their replacements up to speed. It has read <strong>more than 100 codebases</strong> across eight languages.',
-    moral: 'Ownership shows when people leave.',
+    moral: '',
     shot: 'Architecture diagram and the processing pipeline behind it (illustrative design)',
-    image: '/kloudfarm-pipeline.jpg',
+    image: '/kloudfarm-pipeline.webp',
   },
   {
     meta: 'AI · Team enablement',
@@ -175,9 +182,9 @@ export const more: MoreProject[] = [
     title: 'Techtic, bringing senior engineers onto AI',
     story:
       'The CEO had a team of engineers with 10 to 20 years of experience and deep distrust of AI output. He asked me to change that. As AI enablement lead I ran hands-on sessions across backend and mobile, including turning Figma designs into production screens without losing fidelity, and showed where AI helps and where a human still decides. Alongside that, I delivered full-stack work on two calculation-heavy products.',
-    moral: 'Trust is taught, not forced.',
+    moral: '',
     shot: 'An AI-assisted build session, from Figma frame to reviewed code (illustrative design)',
-    image: '/techtic-enablement.jpg',
+    image: '/techtic-enablement.webp',
   },
   {
     meta: 'Accessibility · Nigeria',
@@ -185,9 +192,9 @@ export const more: MoreProject[] = [
     title: 'iLens, sight support for blind users',
     story:
       "A blind shopper can't read a naira note. With iLens they point the phone and hear the value. It also names objects and warns about obstacles, all by voice. I was the full-stack engineer and product manager. I ran the research and customer survey, then built it with a partner on the backend.",
-    moral: 'Technology should serve the person who needs it most.',
+    moral: '',
     shot: 'Welcome, voice home screen and settings (illustrative design)',
-    image: '/ilens-voice.jpg',
+    image: '/ilens-voice.webp',
   },
   {
     meta: 'AI · Video',
@@ -195,9 +202,9 @@ export const more: MoreProject[] = [
     title: 'Shotkeet, from a prompt to a video',
     story:
       'Describe a product and get a finished MP4 back in about two minutes, built for Nigerian sellers who post from their phones. AI writes the video as code, a safety scan rejects unsafe output, and a queue worker renders it. This is my own project, and I built all of it myself in <strong>three days</strong>, from the rendering pipeline to the screen you type into.',
-    moral: 'Small team. Full product.',
+    moral: '',
     shot: 'Form, live generation progress and the finished video (illustrative design)',
-    image: '/shotkeet-video.jpg',
+    image: '/shotkeet-video.webp',
   },
 ]
 
@@ -225,13 +232,12 @@ export const steps = [
 ]
 
 export const about = {
-  lead: 'Most founders I meet have already heard “yes.” “Yes” from an agency. “Yes” from a freelancer. “Yes” from an AI tool that built a demo overnight.',
+  lead: 'Most founders I talk to have already been told yes. By an agency, by a freelancer, by an AI tool that had a demo ready overnight.',
   body: [
-    "What they haven't had is someone who asks why.",
-    'A “yes” costs nothing. The bill arrives six months later, when the demo meets real users, real money or a regulator.',
-    'So I start with questions. What does solving this earn you, or save you? What have you tried, and why did it fail? I write back what I heard, and you confirm it before any code exists. Then I freeze the first version, so it ships instead of growing forever.',
-    "I've worked this way for teams in Nigeria, the UK and the US: a school platform that has run for two years, compliance software for a UK care provider, and a credit platform for Nigerian consumers.",
-    "I taught myself to build software. I've spent years teaching others to do the same.",
+    "Then the demo meets real users, or real money, or a regulator, and that's when the bill shows up.",
+    "So I don't start with a yes. I start by asking what this is meant to earn or save you, and what you've already tried. I write back what I understood, and nothing gets built until you tell me I got it right. Then I fix the scope of the first version so it actually ships.",
+    "I've done this for a school in Nigeria that has run on my platform for two years, a care provider in the UK, and a credit platform for Nigerian customers.",
+    "I taught myself to code, and I've spent years teaching other people to do the same.",
   ],
-  close: "I don't sell hours. I sell the decisions that keep your product standing.",
+  close: "You're paying for the decisions, not the hours.",
 }
