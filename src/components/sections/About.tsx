@@ -7,9 +7,9 @@ export default function About() {
       <span className="label">About David</span>
       <div className="about">
         <h2 className="quote" id="about-h">
-          A “yes” costs nothing.{' '}
+          {about.heading[0]}{' '}
           <span>
-            The bill arrives six months later.
+            {about.heading[1]}
             <Underline />
           </span>
         </h2>

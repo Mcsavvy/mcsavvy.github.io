@@ -232,12 +232,13 @@ export const steps = [
 ]
 
 export const about = {
-  lead: 'Most founders I talk to have already been told yes. By an agency, by a freelancer, by an AI tool that had a demo ready overnight.',
+  heading: ['The demo worked.', 'Then real people showed up.'],
+  lead: "I've seen how easy it is to get a founder excited about a demo. The hard part comes when people start using it for real.",
   body: [
-    "Then the demo meets real users, or real money, or a regulator, and that's when the bill shows up.",
-    "So I don't start with a yes. I start by asking what this is meant to earn or save you, and what you've already tried. I write back what I understood, and nothing gets built until you tell me I got it right. Then I fix the scope of the first version so it actually ships.",
-    "I've done this for a school in Nigeria that has run on my platform for two years, a care provider in the UK, and a credit platform for Nigerian customers.",
-    "I taught myself to code, and I've spent years teaching other people to do the same.",
+    'An agency, a freelancer, or an AI tool can say yes pretty quickly. The bill often comes later, when real users, real money, or a regulator get involved.',
+    "I start by asking what the product should earn or save you, and what you've already tried. Then I write back what I understood. Nothing gets built until you confirm I've got it right.",
+    "From there, we agree on what belongs in the first version so it can ship without growing forever. I've done this for a school in Nigeria whose platform has run for two years, a care provider in the UK, and a credit platform for Nigerian customers.",
+    'I taught myself to code and have spent years teaching others.',
   ],
-  close: "You're paying for the decisions, not the hours.",
+  close: "You're paying for the decisions behind the work.",
 }
