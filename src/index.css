@@ -106,7 +106,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .shotwrap .shot{margin:0}
 .card .shotwrap{width:calc(100% + 24px); margin:-12px -12px 8px}
 .card .shotwrap .shot{width:100%; margin:0}
-.shot-tag{position:absolute; top:8px; left:8px; font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; line-height:1.2; color:var(--paper-pencil); background:var(--sheet); border:1px solid var(--paper-line); padding:4px 7px; border-radius:2px}
 .card:nth-child(3n+1){transform:rotate(-.5deg)} .card:nth-child(3n+2){transform:rotate(.4deg)} .card:nth-child(3n){transform:rotate(-.2deg)}
 .card .meta{font-size:10px; display:flex; justify-content:space-between; gap:8px; min-height:18px; padding-bottom:9px; border-bottom:1.5px solid var(--paper-line)}
 .card .meta b{font-weight:500; color:var(--paper-pencil)}

@@ -35,9 +35,6 @@ export default function Work() {
             {p.image ? (
               <div className="shotwrap">
                 <img className="shot" src={p.image} alt={`${p.title}: ${p.shot}`} width={1600} height={1000} loading="lazy" />
-                {p.shot.includes('(illustrative design)') && (
-                  <span className="shot-tag" aria-hidden="true">Illustrative</span>
-                )}
               </div>
             ) : (
               <div className="shot placeholder">
@@ -71,9 +68,6 @@ export default function Work() {
                 {m.image ? (
                   <div className="shotwrap">
                     <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} width={1600} height={1000} loading="lazy" />
-                    {m.shot.includes('(illustrative design)') && (
-                      <span className="shot-tag" aria-hidden="true">Illustrative</span>
-                    )}
                   </div>
             ) : (
                   <div className="shot placeholder">

@@ -100,7 +100,7 @@ export const featured: Project[] = [
     story:
       "The school runs on yearly cohorts, and the first version couldn't keep one cohort's students apart from the next. Rebuilding meant not disturbing a class in progress, so the new platform went live while the current cohort was rounding up and new students were onboarded straight into it. It has since run the diploma and certificate programmes side by side. <strong>Hundreds of students</strong> across two cohorts and two programmes, and two years on, students still log in every week.",
     moral: 'The best rebuilds are the ones nobody notices.',
-    shot: 'Student dashboard (illustrative design)',
+    shot: 'Student dashboard',
     image: '/plsom-dashboard.webp',
   },
   {
@@ -110,7 +110,7 @@ export const featured: Project[] = [
     story:
       'A new credit platform gets one chance. If money moves wrong once, users leave. I built the parts that decide whether money is safe to move: a fraud engine that watches every transaction, a credit score people can verify, and rewards that turn paying on time into a habit. New fraud rules ran in watch-only mode first, so an honest customer never got blocked by a guess. <strong>Over a thousand transactions</strong> have gone through it ahead of the wider launch.',
     moral: '',
-    shot: 'Credit score, rewards and fraud rules (illustrative design)',
+    shot: 'Credit score, rewards and fraud rules',
     image: '/creditveto-product.webp',
   },
   {
@@ -130,7 +130,7 @@ export const featured: Project[] = [
     story:
       "A care provider faces inspectors with one question: can you prove it? Spreadsheets can't. I designed a system where every incident and complaint leaves a record no one can edit later, and problems rise to the right manager before they become findings. It tracks <strong>41 KPIs</strong> across the regulator's five domains, so inspection day becomes a printout instead of a scramble. Built, delivered and ready for rollout.",
     moral: 'In regulated work, the product is the proof.',
-    shot: 'Director fleet view with an escalated alert (illustrative design)',
+    shot: 'Director fleet view with an escalated alert',
     image: '/trakitt-dashboard.webp',
   },
 ]
@@ -163,7 +163,7 @@ export const more: MoreProject[] = [
     story:
       'Small traders lose signal more often than they lose receipts. I founded MyFinbuk and served as its CTO and technical lead, engineering the product and running the infrastructure. It keeps working offline, syncs the moment the network returns, and asks the trader which version to keep when two edits collide.',
     moral: '',
-    shot: 'Saved offline, conflict review, synced (illustrative design)',
+    shot: 'Saved offline, conflict review, synced',
     image: '/myfinbuk-offline.webp',
   },
   {
@@ -173,7 +173,7 @@ export const more: MoreProject[] = [
     story:
       'Kloudfarm turns a codebase into a live architecture diagram. As the core backend and cloud infrastructure engineer, I built the ingestion service for GitHub and zip uploads, moved vectorization onto AWS Step Functions and ran the AWS infrastructure. Midway through, the other engineers left. I stayed, owned the service and brought their replacements up to speed. It has read <strong>more than 100 codebases</strong> across eight languages.',
     moral: '',
-    shot: 'Architecture diagram and the processing pipeline behind it (illustrative design)',
+    shot: 'Architecture diagram and the processing pipeline behind it',
     image: '/kloudfarm-pipeline.webp',
   },
   {
@@ -183,7 +183,7 @@ export const more: MoreProject[] = [
     story:
       'The CEO had a team of engineers with 10 to 20 years of experience and deep distrust of AI output. He asked me to change that. As AI enablement lead I ran hands-on sessions across backend and mobile, including turning Figma designs into production screens without losing fidelity, and showed where AI helps and where a human still decides. Alongside that, I delivered full-stack work on two calculation-heavy products.',
     moral: '',
-    shot: 'An AI-assisted build session, from Figma frame to reviewed code (illustrative design)',
+    shot: 'An AI-assisted build session, from Figma frame to reviewed code',
     image: '/techtic-enablement.webp',
   },
   {
@@ -193,7 +193,7 @@ export const more: MoreProject[] = [
     story:
       "A blind shopper can't read a naira note. With iLens they point the phone and hear the value. It also names objects and warns about obstacles, all by voice. I was the full-stack engineer and product manager. I ran the research and customer survey, then built it with a partner on the backend.",
     moral: '',
-    shot: 'Welcome, voice home screen and settings (illustrative design)',
+    shot: 'Welcome, voice home screen and settings',
     image: '/ilens-voice.webp',
   },
   {
@@ -203,7 +203,7 @@ export const more: MoreProject[] = [
     story:
       'Describe a product and get a finished MP4 back in about two minutes, built for Nigerian sellers who post from their phones. AI writes the video as code, a safety scan rejects unsafe output, and a queue worker renders it. This is my own project, and I built all of it myself in <strong>three days</strong>, from the rendering pipeline to the screen you type into.',
     moral: '',
-    shot: 'Form, live generation progress and the finished video (illustrative design)',
+    shot: 'Form, live generation progress and the finished video',
     image: '/shotkeet-video.webp',
   },
 ]
