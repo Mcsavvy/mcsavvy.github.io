@@ -4,17 +4,15 @@ import { Underline } from '../Pencil'
 export default function About() {
   return (
     <section className="sec" id="about" aria-labelledby="about-h">
-      <div className="sec-head">
-        <span className="label" id="about-h">About David</span>
-      </div>
+      <span className="label">About David</span>
       <div className="about">
-        <p className="quote">
-          A “yes” costs nothing.{' '}
+        <h2 className="quote" id="about-h">
+          {about.heading[0]}{' '}
           <span>
-            The bill arrives six months later.
+            {about.heading[1]}
             <Underline />
           </span>
-        </p>
+        </h2>
         <div className="copy">
           <p className="lead">{about.lead}</p>
           {about.body.map((t) => (

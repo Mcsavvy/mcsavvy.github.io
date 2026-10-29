@@ -25,7 +25,7 @@ export default function Work() {
         <h2 id="work-h">
           Products people <em>actually use.</em>
         </h2>
-        <p>Four products, four different worries. Each one started with a question, not a spec.</p>
+        <p>Money that has to move safely, a school mid-term, a regulator at the door, an AI that keeps missing the right file. Each started with a question, not a spec.</p>
       </div>
 
       <div className="work">
@@ -34,10 +34,7 @@ export default function Work() {
             <span className="tape" aria-hidden="true" />
             {p.image ? (
               <div className="shotwrap">
-                <img className="shot" src={p.image} alt={`${p.title}: ${p.shot}`} />
-                {p.shot.includes('(illustrative design)') && (
-                  <span className="shot-tag" aria-hidden="true">Illustrative</span>
-                )}
+                <img className="shot" src={p.image} alt={`${p.title}: ${p.shot}`} width={1600} height={1000} loading="lazy" />
               </div>
             ) : (
               <div className="shot placeholder">
@@ -52,7 +49,7 @@ export default function Work() {
               <h3>{p.title}</h3>
               {p.role && <span className="role">{p.role}</span>}
               <p dangerouslySetInnerHTML={{ __html: p.story }} />
-              <span className="hand moral">{p.moral}</span>
+              {p.moral && <span className="hand moral">{p.moral}</span>}
             </div>
           </article>
         ))}
@@ -70,10 +67,7 @@ export default function Work() {
               <article className="card" key={m.title}>
                 {m.image ? (
                   <div className="shotwrap">
-                    <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} loading="lazy" />
-                    {m.shot.includes('(illustrative design)') && (
-                      <span className="shot-tag" aria-hidden="true">Illustrative</span>
-                    )}
+                    <img className="shot" src={m.image} alt={`${m.title}: ${m.shot}`} width={1600} height={1000} loading="lazy" />
                   </div>
             ) : (
                   <div className="shot placeholder">
@@ -89,7 +83,7 @@ export default function Work() {
                 </span>
                 <h3>{m.title}</h3>
                 <p dangerouslySetInnerHTML={{ __html: m.story }} />
-                <span className="hand moral">{m.moral}</span>
+                {m.moral && <span className="hand moral">{m.moral}</span>}
               </article>
             ))}
           </div>

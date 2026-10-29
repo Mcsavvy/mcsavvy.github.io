@@ -54,6 +54,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .t-cta:hover{transform:rotate(0) translateY(-3px)}
 .t-cta .label{color:var(--paper-ink); opacity:.7}
 .t-cta b{font-size:22px; line-height:1.12; letter-spacing:-.02em}
+.t-cta .friction{font-size:12px; color:var(--paper-ink); opacity:.75; margin-top:-4px}
 .t-cta .go{display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; border-top:1px solid rgba(15,35,68,.25); padding-top:10px}
 
 .receipts{margin-top:clamp(56px,7cqi,96px); padding-top:clamp(28px,3.5cqi,44px); border-top:1px dashed var(--paper-line); display:flex; flex-direction:column; gap:22px}
@@ -77,7 +78,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .proj:nth-child(1){transform:rotate(-.5deg)} .proj:nth-child(2){transform:rotate(.6deg); margin-top:36px}
 .proj:nth-child(3){transform:rotate(.4deg)} .proj:nth-child(4){transform:rotate(-.6deg); margin-top:36px}
 .proj .tape{top:-9px; left:50%; transform:translateX(-50%) rotate(-3deg)}
-.shot{display:block; width:100%; aspect-ratio:16/10; object-fit:cover; margin-bottom:24px}
+.shot{display:block; width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; margin-bottom:24px}
 .shot.placeholder{display:flex; align-items:flex-end; padding:12px; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; line-height:1.4; color:var(--paper-pencil);
   background:repeating-linear-gradient(135deg,var(--paper-line) 0 1px,transparent 1px 11px), #E6ECF4; border:1px dashed var(--paper-line)}
 .shot.placeholder b{display:block; color:var(--paper-ink); font-weight:500}
@@ -105,7 +106,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .shotwrap .shot{margin:0}
 .card .shotwrap{width:calc(100% + 24px); margin:-12px -12px 8px}
 .card .shotwrap .shot{width:100%; margin:0}
-.shot-tag{position:absolute; top:8px; left:8px; font-family:var(--mono); font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; line-height:1.2; color:var(--paper-pencil); background:var(--sheet); border:1px solid var(--paper-line); padding:4px 7px; border-radius:2px}
 .card:nth-child(3n+1){transform:rotate(-.5deg)} .card:nth-child(3n+2){transform:rotate(.4deg)} .card:nth-child(3n){transform:rotate(-.2deg)}
 .card .meta{font-size:10px; display:flex; justify-content:space-between; gap:8px; min-height:18px; padding-bottom:9px; border-bottom:1.5px solid var(--paper-line)}
 .card .meta b{font-weight:500; color:var(--paper-pencil)}
@@ -148,6 +148,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
 .mail{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:var(--mono); font-size:13px; color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:10px 12px; background:rgba(15,35,68,.6)}
 .mail span{user-select:all; flex:1; min-width:0; overflow-wrap:anywhere}
 .mail button{all:unset; cursor:pointer; font:600 12px var(--sans); color:var(--ink)}
+.wa{font-size:14px; color:var(--pencil); text-decoration:underline; text-underline-offset:3px}
+.wa:hover{color:var(--ink)}
 .links{display:flex; gap:18px; flex-wrap:wrap; font-size:14px}
 .links a{border-bottom:1px solid var(--line); padding-bottom:2px; color:var(--pencil)}
 .links a:hover{color:var(--ink)}
@@ -199,8 +201,29 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--paper-ink); outline
   .receipts-row,.more,.how{grid-template-columns:minmax(0,1fr)}
   .copy{font-size:17px}
 }
+
+/* ---------- reviews marquee ---------- */
+.marquees{display:flex; flex-direction:column; gap:18px; width:100cqi; margin-inline:calc(50% - 50cqi); overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.marquee-track{display:flex; width:max-content; animation:marquee 38s linear infinite}
+.rev-back .marquee-track{animation-direction:reverse; animation-duration:44s}
+.marquees:hover .marquee-track,.marquees:focus-within .marquee-track{animation-play-state:paused}
+.marquee-half{display:flex; gap:18px; padding-right:18px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.rev{width:360px; flex:none; margin:0; justify-content:space-between; gap:18px}
+.rev blockquote{margin:0; font-size:17px; line-height:1.45; color:var(--paper-ink)}
+.rev figcaption{display:flex; align-items:center; gap:12px}
+.rev-photo{width:44px; height:44px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex:none; border:1px solid var(--paper-line); background:var(--paper)}
+.rev-photo.logo{object-fit:contain; padding:4px; background:var(--sheet)}
+.rev-who{display:flex; flex-direction:column; font-size:13px; line-height:1.35; color:var(--paper-pencil); min-width:0}
+.rev-who b{font-size:14px; color:var(--paper-ink)}
+.rev-who a{font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-decoration:underline; text-underline-offset:3px}
+@media (max-width:540px){.rev{width:300px}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .marquees{-webkit-mask-image:none; mask-image:none; overflow-x:auto}
+  .marquee-track{animation:none}
+  .marquee-half[aria-hidden],.rev[aria-hidden]{display:none}
   .pen-underline path{animation:none; stroke-dashoffset:0}
   .more-wrap,.more-toggle .chev,.t-cta,.btn-main{transition:none}
   .more-wrap.open .card{animation:none}
