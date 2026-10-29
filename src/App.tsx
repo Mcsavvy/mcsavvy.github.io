@@ -15,11 +15,11 @@ function App() {
       <PencilFilter />
       <Hero />
       <main>
-        <Work />
         <Reviews />
+        <Work />
+        <About />
         <Process />
         <Engagements />
-        <About />
         <Faq />
         <Contact />
       </main>

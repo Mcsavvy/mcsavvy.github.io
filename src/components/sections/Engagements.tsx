@@ -6,7 +6,7 @@ export default function Engagements() {
     <section className="sec" id="ways" aria-labelledby="ways-h">
       <div className="sec-head">
         <span className="label">Working together</span>
-        <h2 id="ways-h">Two ways to work together</h2>
+        <h2 id="ways-h">What it costs and what you get</h2>
       </div>
       <div className="ways">
         {engagements.map((e) => (

@@ -47,6 +47,7 @@ export default function Contact() {
             <span>{contact.bookingLabel}</span>
             <span aria-hidden="true">→</span>
           </a>
+          <a className="wa" href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer">{contact.whatsappLabel} ↗</a>
           <div className="mail">
             <span id="contact-email">{contact.email}</span>
             <button type="button" onClick={copy}>{copied}</button>

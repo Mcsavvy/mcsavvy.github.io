@@ -22,8 +22,9 @@ export default function Hero() {
         </a>
         <ul>
           <li><a href="#work">Work</a></li>
-          <li><a href="#how">How I work</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#how">How I work</a></li>
+          <li><a href="#ways">Pricing</a></li>
         </ul>
         <a className="nav-call" href={contact.bookingUrl} target="_blank" rel="noopener noreferrer">Book a call ↗</a>
       </nav>
@@ -36,7 +37,7 @@ export default function Hero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/hero-poster.jpg"
             aria-label="Animation in four steps. The idea: a founder says I have an idea, is it even possible? The answer: yes, here is how. The plan: discovery, architecture, build. The product: secure, live, yours."
           >
@@ -51,8 +52,8 @@ export default function Hero() {
             I turn your idea into a product people <em>actually use.</em>
           </h1>
           <p>
-            You come with “is this even possible?” I bring the judgment: what to build, what to skip, and how
-            to keep it standing once real people use it.
+            You come with “is this even possible?” I ask what it should earn or save you, then tell you what to
+            build, what to skip, and how to keep it standing once real people use it.
           </p>
         </div>
 
@@ -69,6 +70,7 @@ export default function Hero() {
             <span>{contact.bookingLabel}</span>
             <span aria-hidden="true">→</span>
           </span>
+          <span className="friction">Free, no obligation. Projects from $10,000.</span>
         </a>
       </div>
 
