@@ -20,6 +20,46 @@ export const receipts = [
 
 export const testimonial = { quote: '', name: '', role: '', org: '' }
 
+// Client reviews, shortened from the full messages they sent me. Each review is split into
+// the points the reviewer made; wording stays theirs. Add a reviewer to the list and a new
+// card appears in the marquee.
+export type Review = {
+  quote: string
+  name: string
+  role: string
+  org: string
+  site: string // reviewer's own website
+  photo: string
+  fit?: 'cover' | 'contain'
+}
+
+const ejGreat = {
+  name: 'Kolawole Olumuyiwa',
+  role: 'Owner',
+  org: 'E.J Great Interior & Furniture',
+  site: 'https://ejgreat.futurdevs.com',
+  photo: '/reviews/kolawole-olumuyiwa.webp',
+}
+const inom = {
+  name: 'Monijesuloluwa Ayinde',
+  role: 'Fashion designer',
+  org: 'INOM',
+  site: 'https://inomltd.futurdevs.com',
+  photo: '/reviews/inom.webp',
+  fit: 'contain' as const,
+}
+
+export const reviews: Review[] = [
+  { ...ejGreat, quote: 'David understood our vision, turned our ideas into reality and delivered an excellent result in a remarkably short time.' },
+  { ...inom, quote: 'I had my website barely two days after sending my details, and I\u2019m genuinely impressed by what David made of so little insight into my business.' },
+  { ...ejGreat, quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
+  { ...inom, quote: 'The website has personality. You can see how much creativity and extra effort went into it.' },
+  { ...ejGreat, quote: 'He didn\u2019t just build us a website. He helped us build a stronger digital presence that showcases our services and positions us for growth.' },
+  { ...inom, quote: 'Every button works, and works fast. Email, TikTok, Instagram: other people have tested them too.' },
+  { ...ejGreat, quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.' },
+  { ...inom, quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
+]
+
 export const engagements = [
   { title: 'Build it with you', text: 'One partner from research to launch: product, design, architecture, engineering and deployment.', price: 'Projects from $10,000' },
   { title: 'Fractional CTO', text: 'Ongoing technical leadership for a founder or a small team: decisions, architecture, hiring and reviews.', price: '' },
