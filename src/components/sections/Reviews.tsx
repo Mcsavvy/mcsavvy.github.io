@@ -3,11 +3,11 @@ import { reviews, type Review } from '../../content'
 // Two rows drifting in opposite directions. Each row's cards are rendered twice and the track
 // slides by exactly half its width, so the loop has no visible seam. The second copy is hidden
 // from assistive tech and the tab order.
-// both brands appear in each strip: cards 0,1 and 4,5 on top, 2,3 and 6,7 below
+// even cards go on top, odd below; the list order in content.ts keeps a business from sitting next to itself
 // card width 360 plus the 18px gap
 const CARD_SPAN = 378
-const rowA = reviews.filter((_, i) => i % 4 < 2)
-const rowB = reviews.filter((_, i) => i % 4 >= 2)
+const rowA = reviews.filter((_, i) => i % 2 === 0)
+const rowB = reviews.filter((_, i) => i % 2 === 1)
 
 // React 18 does not know the `inert` attribute, so it is spread in untyped.
 const inertProps = { inert: '' } as object

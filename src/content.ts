@@ -64,20 +64,22 @@ const angela = {
   org: 'Angela Barnabas',
   site: 'https://angela.futurdevs.com',
   photo: '/reviews/angela-barnabas.webp',
-  logo: '/reviews/angela-barnabas.webp', // no brand logo, so her photo stands in
+  logo: '/reviews/angela-barnabas-2.webp', // no brand logo, so a second photo of her stands in
 }
 
 export const reviews: Review[] = [
+// Order matters: the marquee splits this list into two rows (even and odd positions), and
+// neither row may put the same business next to itself, including where the loop wraps.
   { ...ejGreat, avatar: 'photo', quote: 'David understood our vision, turned our ideas into reality and delivered an excellent result in a remarkably short time.' },
   { ...inom, avatar: 'photo', quote: 'I had my website barely two days after sending my details, and I\u2019m genuinely impressed by what David made of so little insight into my business.' },
-  { ...ejGreat, avatar: 'logo', quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
-  { ...angela, avatar: 'photo', quote: 'He helped me create a stronger digital presence that reflects my brand and showcases my portfolio as a face model, content creator and teacher.' },
   { ...inom, avatar: 'logo', quote: 'The website has personality. You can see how much creativity and extra effort went into it.' },
+  { ...ejGreat, avatar: 'logo', quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
   { ...ejGreat, avatar: 'logo', quote: 'He didn\u2019t just build us a website. He helped us build a stronger digital presence that showcases our services and positions us for growth.' },
   { ...inom, avatar: 'logo', quote: 'Every button works, and works fast. Email, TikTok, Instagram: other people have tested them too.' },
+  { ...inom, avatar: 'photo', quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
   { ...ejGreat, avatar: 'photo', quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.' },
   { ...angela, avatar: 'logo', quote: 'David\u2019s work reflects the creativity, excellence, authenticity and professionalism I value in my brand.' },
-  { ...inom, avatar: 'photo', quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
+  { ...angela, avatar: 'photo', quote: 'He helped me create a stronger digital presence that reflects my brand and showcases my portfolio as a face model, content creator and teacher.' },
 ]
 
 export const clientSites = [

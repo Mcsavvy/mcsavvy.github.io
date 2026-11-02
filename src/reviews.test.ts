@@ -24,4 +24,17 @@ describe('reviews', () => {
       expect(kinds).toEqual(new Set(['photo', 'logo']))
     }
   })
+
+  it('never puts the same business next to itself in either marquee row, loop seam included', () => {
+    for (const parity of [0, 1]) {
+      const row = reviews.filter((_, i) => i % 2 === parity)
+      row.forEach((r, i) => expect(r.org).not.toBe(row[(i + 1) % row.length].org))
+    }
+  })
+
+  it('shows a different picture of Angela on each of her cards', () => {
+    const shown = reviews.filter((r) => r.org === 'Angela Barnabas').map((r) => r[r.avatar])
+    expect(shown.length).toBeGreaterThanOrEqual(2)
+    expect(new Set(shown).size).toBe(shown.length)
+  })
 })
