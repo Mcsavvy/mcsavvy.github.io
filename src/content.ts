@@ -67,14 +67,25 @@ const angela = {
   logo: '/reviews/angela-barnabas-2.webp', // no brand logo, so a second photo of her stands in
 }
 
+const sevenluxe = {
+  name: 'Alvin Anwadike',
+  role: 'Founder',
+  org: 'SevenLuxe Ride',
+  site: 'https://sevenluxe.futurdevs.com',
+  photo: '/reviews/alvin-anwadike.webp',
+  logo: '/reviews/sevenluxe-logo.webp',
+}
+
 export const reviews: Review[] = [
 // Order matters: the marquee splits this list into two rows (even and odd positions), and
 // neither row may put the same business next to itself, including where the loop wraps.
   { ...ejGreat, avatar: 'photo', quote: 'David understood our vision, turned our ideas into reality and delivered an excellent result in a remarkably short time.' },
   { ...inom, avatar: 'photo', quote: 'I had my website barely two days after sending my details, and I\u2019m genuinely impressed by what David made of so little insight into my business.' },
   { ...inom, avatar: 'logo', quote: 'The website has personality. You can see how much creativity and extra effort went into it.' },
+  { ...sevenluxe, avatar: 'logo', quote: 'It\u2019s functional, user-friendly, and exactly what I wanted. I\u2019m genuinely impressed with the work, and I couldn\u2019t be happier with the outcome.' },
   { ...ejGreat, avatar: 'logo', quote: 'His efficiency, attention to detail and prompt communication made the whole process smooth and stress-free.' },
   { ...ejGreat, avatar: 'logo', quote: 'He didn\u2019t just build us a website. He helped us build a stronger digital presence that showcases our services and positions us for growth.' },
+  { ...sevenluxe, avatar: 'photo', quote: 'Honestly, I absolutely love the website! The navigation is seamless, the layout is straightforward, and everything is well-structured without being unnecessarily complicated.' },
   { ...inom, avatar: 'logo', quote: 'Every button works, and works fast. Email, TikTok, Instagram: other people have tested them too.' },
   { ...inom, avatar: 'photo', quote: 'The fonts catch the eye quickly and make people want to stay. I showed it to other fashion designers in my workspace.' },
   { ...ejGreat, avatar: 'photo', quote: 'Reliable, skilled, creative and result-driven. He takes your project seriously, delivers on time and goes the extra mile.' },
