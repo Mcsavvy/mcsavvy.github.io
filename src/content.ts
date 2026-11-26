@@ -97,6 +97,9 @@ export const clientSites = [
   { name: 'INOM', kind: 'Fashion label', host: 'inomltd.futurdevs.com', href: 'https://inomltd.futurdevs.com', image: '/inom-site.webp', alt: 'The INOM fashion label site on a phone-sized screen' },
   { name: 'E.J Great', kind: 'Interior and furniture', host: 'ejgreat.futurdevs.com', href: 'https://ejgreat.futurdevs.com', image: '/ejgreat-site.webp', alt: 'The E.J Great interior and furniture site' },
   { name: 'Angela Barnabas', kind: 'Model', host: 'angela.futurdevs.com', href: 'https://angela.futurdevs.com', image: '/angela-site.webp', alt: 'The Angela Barnabas modelling site' },
+  { name: 'SevenLuxe Ride', kind: 'Executive car hire', host: 'sevenluxe.futurdevs.com', href: 'https://sevenluxe.futurdevs.com', image: '/sevenluxe-site.webp', alt: 'The SevenLuxe Ride executive car hire site' },
+  { name: 'Barrakah Solutions', kind: 'Oil, gas and marine', host: 'barrakah.futurdevs.com', href: 'https://barrakah.futurdevs.com', image: '/barrakah-site.webp', alt: 'The Barrakah Solutions company site' },
+  { name: 'Victoria Veca Media', kind: 'Photography and film', host: 'veca.futurdevs.com', href: 'https://veca.futurdevs.com', image: '/veca-site.webp', alt: 'The Victoria Veca Media photography site' },
 ]
 
 export const engagements = [
